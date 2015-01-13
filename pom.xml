@@ -7,7 +7,7 @@
 		<version>3.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>authzforce-rest-api-model</artifactId>
-	<version>4.1</version>
+	<version>4.2-SNAPSHOT</version>
 	<name>AuthzForce REST API model</name>
 	<organization>
 		<name>Thales Services SAS</name>
