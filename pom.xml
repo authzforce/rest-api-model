@@ -4,10 +4,10 @@
 	<parent>
 		<artifactId>authzforce-parent</artifactId>
 		<groupId>com.thalesgroup.authzforce</groupId>
-		<version>3.0.3-SNAPSHOT</version>
+		<version>3.0.2</version>
 	</parent>
 	<artifactId>authzforce-rest-api-model</artifactId>
-	<version>4.1</version>
+	<version>4.1.1</version>
 	<name>AuthzForce REST API model</name>
 	<organization>
 		<name>Thales Services SAS</name>
