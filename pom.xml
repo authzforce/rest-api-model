@@ -13,6 +13,13 @@
 		<name>Thales Services SAS</name>
 	</organization>
 	<inceptionYear>2012</inceptionYear>
+	<scm>
+		<!-- Used by Jenkins - Maven prepare-release -->
+		<connection>scm:git:https://gitlab.dev.theresis.org/authzforce/rest-api-model.git</connection>
+		<developerConnection>scm:git:https://gitlab.dev.theresis.org/authzforce/rest-api-model.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://gitlab.dev.theresis.org/authzforce/rest-api-model.git</url>
+	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
