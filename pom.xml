@@ -4,10 +4,10 @@
 	<parent>
 		<artifactId>authzforce-parent</artifactId>
 		<groupId>com.thalesgroup.authzforce</groupId>
-		<version>3.0.3</version>
+		<version>3.0.6</version>
 	</parent>
 	<artifactId>authzforce-rest-api-model</artifactId>
-	<version>4.3-SNAPSHOT</version>
+	<version>4.1.2-SNAPSHOT</version>
 	<name>AuthzForce REST API model</name>
 	<organization>
 		<name>Thales Services SAS</name>
@@ -15,10 +15,10 @@
 	<inceptionYear>2012</inceptionYear>
 	<scm>
 		<!-- Used by Jenkins - Maven prepare-release -->
-		<connection>scm:git:https://gitlab.dev.theresis.org/authzforce/rest-api-model.git</connection>
-		<developerConnection>scm:git:https://gitlab.dev.theresis.org/authzforce/rest-api-model.git</developerConnection>
+		<connection>scm:git:${scm.baseUrl}/rest-api-model.git</connection>
+		<developerConnection>scm:git:${scm.baseUrl}/rest-api-model.git</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://gitlab.dev.theresis.org/authzforce/rest-api-model.git</url>
+		<url>${scm.baseUrl}/rest-api-model.git</url>
 	</scm>
 	<dependencies>
 		<dependency>
@@ -28,7 +28,6 @@
 		<dependency>
 			<groupId>com.thalesgroup.ktd.scis</groupId>
 			<artifactId>atom-model</artifactId>
-			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.thalesgroup.authzforce</groupId>
@@ -123,72 +122,28 @@
 					</execution>
 				</executions>
 				<configuration>
-					<debug>true</debug>
+					<debug>false</debug>
 					<verbose>true</verbose>
 					<extension>true</extension>
-					<!-- <args> -->
-					<!-- <arg>-Xequals</arg> -->
-					<!-- <arg>-XhashCode</arg> -->
-					<!-- </args> -->
-					<episodes>
-						<episode>
-							<groupId>com.thalesgroup.ktd.scis</groupId>
-							<artifactId>atom-model</artifactId>
-						</episode>
-						<episode>
-							<groupId>com.thalesgroup.ktd.scis</groupId>
-							<artifactId>oasis-xacml-model</artifactId>
-						</episode>
-						<episode>
-							<groupId>com.thalesgroup.authzforce</groupId>
-							<artifactId>authzforce-core-model</artifactId>
-						</episode>
-					</episodes>
-					<plugins>
-						<plugin>
-							<groupId>org.jvnet.jaxb2_commons</groupId>
-							<artifactId>jaxb2-basics</artifactId>
-							<version>0.6.4</version>
-						</plugin>
-						<plugin>
-							<groupId>com.thalesgroup.ktd.scis</groupId>
-							<artifactId>atom-model</artifactId>
-						</plugin>
-						<plugin>
-							<groupId>com.thalesgroup.ktd.scis</groupId>
-							<artifactId>oasis-xacml-model</artifactId>
-						</plugin>
-						<plugin>
-							<groupId>com.thalesgroup.authzforce</groupId>
-							<artifactId>authzforce-core-model</artifactId>
-						</plugin>
-					</plugins>
+					<removeOldOutput>true</removeOldOutput>
+					<useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
+					<strict>false</strict>
 					<bindingDirectory>src/main/jaxb</bindingDirectory>
 					<bindingIncludes>
 						<include>bindings.xjb</include>
 					</bindingIncludes>
 					<catalog>src/main/jaxb/catalog.xml</catalog>
-					<catalogResolver>org.jvnet.jaxb2.maven2.resolver.tools.ClasspathCatalogResolver</catalogResolver>
-					<schemaDirectory>src/main/jaxb</schemaDirectory>
+					<schemaDirectory>src/main/resources/xsd</schemaDirectory>
 					<schemaIncludes>
-						<!-- <include>authz-api.xsd</include> -->
-						<!-- Necessary wrapper schema for maven-jaxb2-plugin to work -->
-						<include>authz-api-jaxb-wrapper.xsd</include>
+						<include>authz-api.xsd</include>
 					</schemaIncludes>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-wadl2java-plugin</artifactId>
-				<!-- xjc extra args should be now supported in 2.7.4: https://issues.apache.org/jira/browse/CXF-4791 -->
+				<!-- Note: xjc extra args for this plugin should be supported since 2.7.4: https://issues.apache.org/jira/browse/CXF-4791 -->
 				<version>${cxf.version}</version>
-				<!-- <dependencies> -->
-				<!-- <dependency> -->
-				<!-- <groupId>org.jvnet.jaxb2_commons</groupId> -->
-				<!-- <artifactId>jaxb2-basics</artifactId> -->
-				<!-- <version>${jaxb2-basics.version}</version> -->
-				<!-- </dependency> -->
-				<!-- </dependencies> -->
 				<executions>
 					<execution>
 						<id>generate-sources</id>
@@ -223,12 +178,6 @@
 										<extraarg>{http://thalesgroup.com/authz/model/3.0}policySets=com.thalesgroup.authz.model._3.PolicySets</extraarg>
 										<extraarg>-tMap</extraarg>
 										<extraarg>{http://thalesgroup.com/authz/model/3.0}attributeFinders=com.thalesgroup.authz.model._3.AttributeFinders</extraarg>
-										<!-- <extraarg>-catalog</extraarg> -->
-										<!-- <extraarg>file:/${basedir}/src/main/resources/catalog.xml</extraarg> -->
-										<!-- <extraarg>-b</extraarg> -->
-										<!-- <extraarg>file:/${basedir}/src/main/resources/authzforce.xjb</extraarg> -->
-										<!-- <extraarg>-xjc-XhashCode</extraarg> -->
-										<!-- <extraarg>-xjc-Xequals</extraarg> -->
 									</extraargs>
 								</wadlOption>
 							</wadlOptions>
@@ -274,7 +223,7 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<finalName>FIWARE-SEC-AuthorizationPDP-REST-API-Model-${project.version}</finalName>
+							<finalName>FIWARE-AuthorizationPDP-REST-API-Model-${project.version}</finalName>
 							<descriptors>
 								<descriptor>assembly.xml</descriptor>
 							</descriptors>
