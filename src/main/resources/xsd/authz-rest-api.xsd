@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2012-2015 Thales Services SAS.
+
+    This file is part of AuthZForce CE.
+
+    AuthZForce CE is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    AuthZForce CE is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with AuthZForce CE.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/xmlns/authz/rest/api" xmlns:tns="http://authzforce.github.io/xmlns/authz/rest/api"
+	xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext" xmlns:authz-res="http://authzforce.github.io/xmlns/rest/api/base" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml-policy="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+	version="4.4">
+	<xs:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" />
+	<xs:import namespace="http://www.w3.org/2005/Atom" />
+	<xs:import namespace="http://authzforce.github.io/xmlns/rest/api/base" schemaLocation="rest-api-base.xsd" />
+	<xs:import namespace="http://authzforce.github.io/xmlns/pdp/ext" />
+	<!-- As an implementer of this API, replace the following schema import (example from Thales Authzforce
+		implementation) with one that defines any API extension specific to your implementation such as PDP attribute/policy finders.
+		Make sure the import namespace matches the one in your extension schema.
+		See authzforce-ext.xsd for example.
+	-->
+	<xs:import namespace="http://authzforce.github.io/xmlns/authzforce/ext" schemaLocation="authzforce-ext.xsd" />
+
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			Data Model for RESTful API of Authorization
+			Service
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="PdpProperties">
+		<xs:annotation>
+			<xs:documentation>
+				PDP properties managed by this API
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="rootPolicyId" type="xs:NCName" use="required" />
+	</xs:complexType>
+	<xs:complexType name="AttributeProviderList">
+		<xs:sequence>
+			<xs:element name="attributeProvider" type="authz-ext:AbstractAttributeProvider" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="error">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="message" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="domain" type="authz-res:ManagedResource" />
+	<xs:element name="pdpProperties" type="tns:PdpProperties" />
+	<xs:element name="attributeProviders" type="tns:AttributeProviderList" />
+</xs:schema>
