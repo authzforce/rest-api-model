@@ -1,24 +1,26 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>authzforce-parent</artifactId>
-		<groupId>com.thalesgroup.authzforce</groupId>
-		<version>3.0.11-SNAPSHOT</version>
+		<artifactId>authzforce-ce-parent</artifactId>
+		<groupId>org.ow2.authzforce</groupId>
+		<version>3.3.5</version>
 	</parent>
 	<artifactId>authzforce-rest-api-model</artifactId>
-	<version>4.3.0-SNAPSHOT</version>
-	<name>AuthzForce REST API model</name>
+	<version>4.4.0-SNAPSHOT</version>
+	<name>AuthzForce - Generic REST API model for Authorization PDPs</name>
+	<properties>
+		<git.url.base>https://github.com/authzforce/rest-api-model</git.url.base>
+	</properties>
 	<organization>
 		<name>Thales Services SAS</name>
 	</organization>
+	<url>https://github.com/authzforce/rest-api-model</url>
 	<inceptionYear>2012</inceptionYear>
 	<scm>
-		<!-- Used by Jenkins - Maven prepare-release -->
-		<connection>scm:git:${scm.baseUrl}/rest-api-model.git</connection>
-		<developerConnection>scm:git:${scm.baseUrl}/rest-api-model.git</developerConnection>
+		<connection>scm:git:${git.url.base}.git</connection>
+		<developerConnection>scm:git:${git.url.base}.git</developerConnection>
 		<tag>HEAD</tag>
-		<url>${scm.baseUrl}/rest-api-model.git</url>
+		<url>${git.url.base}</url>
 	</scm>
 	<dependencies>
 		<dependency>
@@ -26,16 +28,12 @@
 			<artifactId>javax.ws.rs-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.thalesgroup.authzforce</groupId>
-			<artifactId>authzforce-atom-model</artifactId>
+			<groupId>org.ow2.authzforce</groupId>
+			<artifactId>authzforce-ce-atom-model</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.thalesgroup.authzforce</groupId>
-			<artifactId>authzforce-xacml-model</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.thalesgroup.authzforce</groupId>
-			<artifactId>authzforce-pdp-ext-model</artifactId>
+			<groupId>org.ow2.authzforce</groupId>
+			<artifactId>authzforce-ce-pdp-ext-model</artifactId>
 		</dependency>
 
 		<!-- Test dependencies -->
@@ -47,11 +45,6 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -89,16 +82,7 @@
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<configuration>
-					<properties>
-						<!-- Values to be substituted in template -->
-						<inceptionYear>${project.inceptionYear}</inceptionYear>
-						<currentYear>${currentYear}</currentYear>
-						<copyrightOwner>${project.organization.name}</copyrightOwner>
-						<projectName>AuthZForce</projectName>
-					</properties>
-					<!-- <header>com/mycila/maven/plugin/license/templates/GPL-3.txt</header> -->
-					<header>license/thales-gpl.txt</header>
-					<strictCheck>true</strictCheck>
+					<header>license/thales-gpl.header.txt</header>
 					<includes>
 						<include>src/**</include>
 					</includes>
@@ -108,15 +92,15 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>check-license</id>
+						<id>format-sources-license</id>
+						<phase>process-sources</phase>
 						<goals>
-							<!-- attached to verify phase -->
-							<goal>check</goal>
+							<goal>format</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>add-license-headers</id>
-						<phase>process-sources</phase>
+						<id>format-test-sources-license</id>
+						<phase>process-test-sources</phase>
 						<goals>
 							<goal>format</goal>
 						</goals>
@@ -134,12 +118,8 @@
 					</execution>
 				</executions>
 				<configuration>
-					<debug>false</debug>
-					<verbose>true</verbose>
 					<extension>true</extension>
-					<removeOldOutput>true</removeOldOutput>
 					<useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
-					<strict>false</strict>
 					<bindingDirectory>src/main/jaxb</bindingDirectory>
 					<bindingIncludes>
 						<include>bindings.xjb</include>
@@ -147,14 +127,15 @@
 					<catalog>src/main/jaxb/catalog.xml</catalog>
 					<schemaDirectory>src/main/resources/xsd</schemaDirectory>
 					<schemaIncludes>
-						<include>authz-api.xsd</include>
+						<include>authz-rest-api.xsd</include>
 					</schemaIncludes>
+					<generatePackage>org.ow2.authzforce.xmlns.rest.api</generatePackage>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-wadl2java-plugin</artifactId>
-				<!-- Note: xjc extra args for this plugin should be supported since 2.7.4: 
+				<!-- Note: xjc extra args for this plugin should be supported since 2.7.4:
 					https://issues.apache.org/jira/browse/CXF-4791 -->
 				<version>${cxf.version}</version>
 				<executions>
@@ -165,18 +146,24 @@
 							<wadlOptions>
 								<wadlOption>
 									<wadl>${basedir}/src/main/resources/authz-api.wadl</wadl>
-									<packagename>com.thalesgroup.authzforce.api.jaxrs</packagename>
+									<packagename>org.ow2.authzforce.jaxrs.api</packagename>
 									<extraargs>
 										<extraarg>-catalog</extraarg>
 										<extraarg>${basedir}/src/main/jaxb/catalog.xml</extraarg>
 										<extraarg>-verbose</extraarg>
 										<extraarg>-noTypes</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://thalesgroup.com/authz/model/3.0/resource}properties=com.thalesgroup.authz.model._3_0.resource.Properties</extraarg>
-										<extraarg>-tMap</extraarg>
-										<extraarg>{http://thalesgroup.com/authz/model/3.0/resource}resources=com.thalesgroup.authz.model._3_0.resource.Resources</extraarg>
-										<extraarg>-tMap</extraarg>
-										<extraarg>{http://thalesgroup.com/authz/model/3.0}domain=com.thalesgroup.authz.model._3_0.resource.Domain</extraarg>
+										<!-- CXF wadl2java binds xs:anyURI to java.net.URI.
+											However, java.net.URI cannot be used here, because not equivalent to XML schema anyURI type. Spaces are allowed in XSD anyURI [1], not in
+											java.net.URI.
+											[1] http://www.w3.org/TR/xmlschema-2/#anyURI
+											That's why we use String instead like in JAXB.
+											See also:
+											https://java.net/projects/jaxb/lists/users/archive/2011-07/message/16
+											From the JAXB spec: "xs:anyURI is not bound to java.net.URI by default since not all possible values of xs:anyURI can be passed to the
+											java.net.URI constructor.
+										-->
+										<extraarg>{http://www.w3.org/2001/XMLSchema}anyURI=java.lang.String</extraarg>
 										<extraarg>-tMap</extraarg>
 										<extraarg>{http://www.w3.org/2005/Atom}link=org.w3._2005.atom.Link</extraarg>
 										<extraarg>-tMap</extraarg>
@@ -188,9 +175,15 @@
 										<extraarg>-tMap</extraarg>
 										<extraarg>{urn:oasis:names:tc:xacml:3.0:core:schema:wd-17}Response=oasis.names.tc.xacml._3_0.core.schema.wd_17.Response</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://thalesgroup.com/authz/model/3.0}policySets=com.thalesgroup.authz.model._3.PolicySets</extraarg>
+										<extraarg>{http://authzforce.github.io/xmlns/rest/api/base}properties=org.ow2.authzforce.xmlns.rest.api.Properties</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://thalesgroup.com/authz/model/3.0}attributeFinders=com.thalesgroup.authz.model._3.AttributeFinders</extraarg>
+										<extraarg>{http://authzforce.github.io/xmlns/rest/api/base}resources=org.ow2.authzforce.xmlns.rest.api.Resources</extraarg>
+										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/xmlns/authz/rest/api}domain=org.ow2.authzforce.xmlns.rest.api.Domain</extraarg>
+										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/xmlns/authz/rest/api}pdpProperties=org.ow2.authzforce.xmlns.rest.api.PdpProperties</extraarg>
+										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/xmlns/authz/rest/api}attributeProviders=org.ow2.authzforce.xmlns.rest.api.AttributeProviders</extraarg>
 									</extraargs>
 								</wadlOption>
 							</wadlOptions>
@@ -226,28 +219,10 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>distro-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<finalName>AuthorizationPDP-REST-API-Model-${project.version}</finalName>
-							<descriptors>
-								<descriptor>assembly.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>

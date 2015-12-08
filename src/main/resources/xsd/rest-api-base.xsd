@@ -3,27 +3,28 @@
 
     Copyright (C) 2012-2015 Thales Services SAS.
 
-    This file is part of AuthZForce.
+    This file is part of AuthZForce CE.
 
-    AuthZForce is free software: you can redistribute it and/or modify
+    AuthZForce CE is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    AuthZForce is distributed in the hope that it will be useful,
+    AuthZForce CE is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with AuthZForce.  If not, see <http://www.gnu.org/licenses/>.
+    along with AuthZForce CE.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://thalesgroup.com/authz/model/3.0/resource"
-	xmlns:tns="http://thalesgroup.com/authz/model/3.0/resource" xmlns:atom="http://www.w3.org/2005/Atom">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/xmlns/rest/api/base"
+	xmlns:tns="http://authzforce.github.io/xmlns/rest/api/base" xmlns:atom="http://www.w3.org/2005/Atom"
+	version="4.4">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-			Data Model for RESTful API Resource
+			Base Data Model for RESTful API Resources
 		</xs:documentation>
 	</xs:annotation>
 	<xs:import namespace="http://www.w3.org/2005/Atom" />
@@ -35,7 +36,20 @@
 	</xs:simpleType>
 	<xs:complexType name="ManagedResourceProperties">
 		<xs:sequence>
-			<xs:element name="name" type="xs:NCName" />
+			<xs:element name="externalId" type="xs:NCName">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+						Same function as in SCIM schema:
+						An identifier for the Resource as defined by the Service Consumer. The externalId may simplify identification of the Resource between Service Consumer and Service
+						provider by allowing the Consumer
+						to refer to the Resource with its own identifier, obviating the need to store a local mapping between the local identifier of the Resource and the identifier
+						used by the Service Provider. Each
+						Resource MAY include a non-empty externalId value. The value of the externalId attribute is always issued be the Service Consumer and can never be specified by
+						the Service Provider. The Service
+						Provider MUST always interpret the externalId as scoped to the Service Consumer's tenant.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="description" type="tns:Description" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
