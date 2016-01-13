@@ -3,19 +3,16 @@
 	<parent>
 		<artifactId>authzforce-ce-parent</artifactId>
 		<groupId>org.ow2.authzforce</groupId>
-		<version>3.3.6</version>
+		<version>3.3.7</version>
 	</parent>
-	<artifactId>authzforce-rest-api-model</artifactId>
-	<version>4.4.0-SNAPSHOT</version>
-	<name>AuthzForce - Generic REST API model for Authorization PDPs</name>
+	<artifactId>authzforce-ce-rest-api-model</artifactId>
+	<version>4.3.0-SNAPSHOT</version>
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>AuthzForce CE - Generic REST API model for Authorization PDPs</description>
+	<url>https://github.com/authzforce/rest-api-model</url>
 	<properties>
 		<git.url.base>https://github.com/authzforce/rest-api-model</git.url.base>
 	</properties>
-	<organization>
-		<name>Thales Services SAS</name>
-	</organization>
-	<url>https://github.com/authzforce/rest-api-model</url>
-	<inceptionYear>2012</inceptionYear>
 	<scm>
 		<connection>scm:git:${git.url.base}.git</connection>
 		<developerConnection>scm:git:${git.url.base}.git</developerConnection>
@@ -124,6 +121,23 @@
 				<configuration>
 					<extension>true</extension>
 					<useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
+					<args>
+						<arg>-Xvalue-constructor</arg>
+						<arg>-Ximmutable</arg>
+						<arg>-constructorAccess=default</arg>
+					</args>
+					<plugins>
+						<plugin>
+							<groupId>org.jvnet.jaxb2_commons</groupId>
+							<artifactId>jaxb2-value-constructor</artifactId>
+							<version>${jaxb2-value-constructor.version}</version>
+						</plugin>
+						<plugin>
+							<groupId>net.codesup.util</groupId>
+							<artifactId>jaxb2-rich-contract-plugin</artifactId>
+							<version>1.15.0</version>
+						</plugin>
+					</plugins>
 					<bindingDirectory>src/main/jaxb</bindingDirectory>
 					<bindingIncludes>
 						<include>bindings.xjb</include>
@@ -133,7 +147,7 @@
 					<schemaIncludes>
 						<include>authz-rest-api.xsd</include>
 					</schemaIncludes>
-					<generatePackage>org.ow2.authzforce.xmlns.rest.api</generatePackage>
+					<generatePackage>org.ow2.authzforce.rest.api.xmlns</generatePackage>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -150,7 +164,7 @@
 							<wadlOptions>
 								<wadlOption>
 									<wadl>${basedir}/src/main/resources/authz-api.wadl</wadl>
-									<packagename>org.ow2.authzforce.jaxrs.api</packagename>
+									<packagename>org.ow2.authzforce.rest.api.jaxrs</packagename>
 									<extraargs>
 										<extraarg>-catalog</extraarg>
 										<extraarg>${basedir}/src/main/jaxb/catalog.xml</extraarg>
@@ -179,15 +193,17 @@
 										<extraarg>-tMap</extraarg>
 										<extraarg>{urn:oasis:names:tc:xacml:3.0:core:schema:wd-17}Response=oasis.names.tc.xacml._3_0.core.schema.wd_17.Response</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/xmlns/rest/api/base}properties=org.ow2.authzforce.xmlns.rest.api.Properties</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}properties=org.ow2.authzforce.rest.api.xmlns.ManagedResourceProperties</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/xmlns/rest/api/base}resources=org.ow2.authzforce.xmlns.rest.api.Resources</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}resourceContent=org.ow2.authzforce.rest.api.xmlns.ResourceContent</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/xmlns/authz/rest/api}domain=org.ow2.authzforce.xmlns.rest.api.Domain</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}resources=org.ow2.authzforce.rest.api.xmlns.Resources</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/xmlns/authz/rest/api}pdpProperties=org.ow2.authzforce.xmlns.rest.api.PdpProperties</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}domainProperties=org.ow2.authzforce.rest.api.xmlns.DomainProperties</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/xmlns/authz/rest/api}attributeProviders=org.ow2.authzforce.xmlns.rest.api.AttributeProviders</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}domain=org.ow2.authzforce.rest.api.xmlns.Domain</extraarg>
+										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}attributeProviders=org.ow2.authzforce.rest.api.xmlns.AttributeProviders</extraarg>
 									</extraargs>
 								</wadlOption>
 							</wadlOptions>
