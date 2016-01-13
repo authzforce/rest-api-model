@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2012-2016 Thales Services SAS.
+
+    This file is part of AuthZForce CE.
+
+    AuthZForce CE is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    AuthZForce CE is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with AuthZForce CE.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/rest-api-model/xmlns/authz/4" xmlns:tns="http://authzforce.github.io/rest-api-model/xmlns/authz/4"
+	xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+	version="4.3">
+	<xs:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" />
+	<xs:import namespace="http://www.w3.org/2005/Atom" />
+	<xs:import namespace="http://authzforce.github.io/xmlns/pdp/ext/3" />
+
+	<xs:complexType name="ManagedResourceProperties">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="externalId" type="xs:NMTOKEN" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">
+					Same function as in SCIM schema:
+					An identifier for the Resource as defined by the Service Consumer. The externalId may simplify identification of the
+					Resource between Service Consumer and Service
+					provider by allowing the Consumer
+					to refer to the Resource with its own identifier, obviating the need to store a local mapping between the local
+					identifier of the Resource and the identifier
+					used by the Service Provider. Each
+					Resource MAY include a non-empty externalId value. The value of the externalId attribute is always issued be the
+					Service Consumer and can never be specified by
+					the Service Provider. The Service
+					Provider MUST always interpret the externalId as scoped to the Service Consumer's tenant.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="properties" type="tns:ManagedResourceProperties" />
+	<xs:complexType name="ManagedResourceContent">
+		<xs:annotation>
+			<xs:documentation>
+				Information about resource managed with this API
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tns:properties" minOccurs="0" maxOccurs="1" />
+			<xs:element name="childResources" type="tns:ManagedResourceSet" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="resourceContent" type="tns:ManagedResourceContent" />
+	<xs:complexType name="ManagedResourceSet">
+		<xs:annotation>
+			<xs:documentation>
+				Set of resources managed with this API
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="atom:link" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Link to resource
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="resources" type="tns:ManagedResourceSet" />
+
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			Data Model for RESTful API of Authorization
+			Service
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="DomainProperties">
+		<xs:complexContent>
+			<xs:extension base="tns:ManagedResourceProperties">
+				<xs:sequence>
+					<xs:element name="rootPolicyRef" type="xacml:IdReferenceType" minOccurs="0" maxOccurs="1" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="domainProperties" type="tns:DomainProperties" />
+	<xs:complexType name="DomainResourceContent">
+		<xs:annotation>
+			<xs:documentation>
+				Content of domain resource managed with this API
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="properties" type="tns:DomainProperties" />
+			<xs:element name="childResources" type="tns:ManagedResourceSet" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="domain" type="tns:DomainResourceContent" />
+	<xs:complexType name="AttributeProviderList">
+		<xs:sequence>
+			<xs:element name="attributeProvider" type="authz-ext:AbstractAttributeProvider" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="attributeProviders" type="tns:AttributeProviderList" />
+	<xs:element name="error">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="message" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
