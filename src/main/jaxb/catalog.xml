@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2012-2015 Thales Services SAS.
+    Copyright (C) 2012-2016 Thales Services SAS.
 
     This file is part of AuthZForce CE.
 
@@ -22,7 +22,7 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
 	<system systemId="http://www.w3.org/2001/xml.xsd" uri="maven:org.ow2.authzforce:authzforce-ce-xmlns-model:jar!/xml.xsd" />
 	<public publicId="http://www.w3.org/2005/Atom" uri="maven:org.ow2.authzforce:authzforce-ce-atom-model:jar!/atom.xsd" />
-	<public publicId="http://authzforce.github.io/xmlns/pdp/ext" uri="maven:org.ow2.authzforce:authzforce-ce-pdp-ext-model:jar!/pdp-ext-base.xsd" />
+	<public publicId="http://authzforce.github.io/xmlns/pdp/ext/3" uri="maven:org.ow2.authzforce:authzforce-ce-pdp-ext-model:jar!/pdp-ext-base.xsd" />
 	<public publicId="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" uri="maven:org.ow2.authzforce:authzforce-ce-xacml-model:jar!/xacml-core-v3-schema-wd-17.xsd" />
 
 	<!-- Entries required for CXF wadl2java (systemId used in WADL) -->

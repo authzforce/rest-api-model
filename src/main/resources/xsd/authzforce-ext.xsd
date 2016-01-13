@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2012-2015 Thales Services SAS.
+    Copyright (C) 2012-2016 Thales Services SAS.
 
     This file is part of AuthZForce CE.
 
@@ -21,8 +21,8 @@
 -->
 <xs:schema
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://authzforce.github.io/xmlns/authzforce/ext"
-	xmlns:tns="http://authzforce.github.io/xmlns/authzforce/ext"
+	targetNamespace="http://authzforce.github.io/rest-api-model/xmlns/authzforce/ext"
+	xmlns:tns="http://authzforce.github.io/rest-api-model/xmlns/authzforce/ext"
 	elementFormDefault="qualified"
 	attributeFormDefault="unqualified" version="4.0">
 	<xs:annotation>

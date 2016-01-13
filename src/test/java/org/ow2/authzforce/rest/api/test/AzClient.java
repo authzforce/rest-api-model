@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012-2015 Thales Services SAS.
+ * Copyright (C) 2012-2016 Thales Services SAS.
  *
  * This file is part of AuthZForce CE.
  *
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with AuthZForce CE.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.ow2.authzforce.jaxrs.api.test;
+package org.ow2.authzforce.rest.api.test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,8 +50,8 @@ import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.client.ClientConfiguration;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.ow2.authzforce.jaxrs.api.EndUserDomain;
-import org.ow2.authzforce.jaxrs.api.EndUserDomainSet;
+import org.ow2.authzforce.rest.api.jaxrs.DomainResource;
+import org.ow2.authzforce.rest.api.jaxrs.DomainsResource;
 import org.xml.sax.SAXException;
 
 /**
@@ -115,7 +115,7 @@ public class AzClient
 		/**
 		 * Create the REST (JAX-RS) client
 		 */
-		final EndUserDomainSet domainsResourceProxy = JAXRSClientFactory.create(serviceBaseURL, EndUserDomainSet.class);
+		final DomainsResource domainsResourceProxy = JAXRSClientFactory.create(serviceBaseURL, DomainsResource.class);
 
 		/**
 		 * Request/response logging (for debugging).
@@ -125,7 +125,7 @@ public class AzClient
 		clientConf.getOutInterceptors().add(new LoggingOutInterceptor());
 
 		// Get your domain's resource
-		final EndUserDomain myDomain = domainsResourceProxy.getEndUserDomain(domainId);
+		final DomainResource myDomain = domainsResourceProxy.getDomainResource(domainId);
 
 		/**
 		 * Request some authorization decision from my domain's PDP First build the XACML request. First build the XACML request
@@ -174,7 +174,7 @@ public class AzClient
 		XACML_SCHEMA_VALIDATOR.validate(new JAXBSource(XACML_JAXB_CONTEXT, req));
 
 		// Send the XACML request to PDP
-		final Response response = myDomain.getPdp().requestPolicyDecision(req);
+		final Response response = myDomain.getPdpResource().requestPolicyDecision(req);
 		XACML_SCHEMA_VALIDATOR.validate(new JAXBSource(XACML_JAXB_CONTEXT, response));
 
 		for (final Result result : response.getResults())
