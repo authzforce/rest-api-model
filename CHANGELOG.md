@@ -2,6 +2,8 @@
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
 ## Unreleased
+
+## 4.3.0
 ### Added
 - Parameter 'externalId' to be set by client when provisioning/updating a domain (like in SCIM REST API). Used in query parameter to retrieve a domain resource.
 - REST resource representing a specific policy with path /domains/{id}/pap/policies/{id}
