@@ -201,11 +201,11 @@
 										<extraarg>-tMap</extraarg>
 										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}domain=org.ow2.authzforce.rest.api.xmlns.Domain</extraarg>
 										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}pdpPropertiesUpdate=org.ow2.authzforce.rest.api.xmlns.PdpPropertiesUpdate</extraarg>
+										<extraarg>-tMap</extraarg>
 										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}pdpProperties=org.ow2.authzforce.rest.api.xmlns.PdpProperties</extraarg>
 										<extraarg>-tMap</extraarg>
 										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}attributeProviders=org.ow2.authzforce.rest.api.xmlns.AttributeProviders</extraarg>
-										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}pdpStatus=org.ow2.authzforce.rest.api.xmlns.PdpStatus</extraarg>
 									</extraargs>
 								</wadlOption>
 							</wadlOptions>

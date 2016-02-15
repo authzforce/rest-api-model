@@ -18,14 +18,7 @@
 				<wadl:request>
 					<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:domainProperties">
 						<wadl:doc>
-							If the 'rootPolicyRef' element is missing, a default root policy is automatically created for the domain and a corresponding rootPolicyRef set by the Service Provider of this API in
-							the domain
-							properties.
-							If the 'rootPolicyRef' element is present, it assumes that the Service Provider of this API initializes the domain with a fixed set of policies, and the client knows about
-							those policies
-							and therefore how to set the 'rootPolicyRef' properly to match one of those pre-set policies. If
-							the 'rootPolicyRef' does not match any, the domain creation request will be
-							rejected.
+							New domain properties. A default root policy is automatically created for the domain and a corresponding rootPolicyRef set by the Service Provider of this API (see resource 'pdpPropertiesResource').
 						</wadl:doc>
 					</wadl:representation>
 				</wadl:request>
@@ -114,6 +107,32 @@
 						<wadl:response status="404" />
 						<wadl:response status="403" />
 					</wadl:method>
+					<wadl:resource id="pdpPropertiesResource" path="properties">
+						<wadl:doc>Miscellaneous PDP properties, including the root policy reference</wadl:doc>
+						<wadl:method name="PUT" id="updateOtherPdpProperties">
+							<wadl:doc>Update PDP properties</wadl:doc>
+							<wadl:request>
+								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpPropertiesUpdate" />
+							</wadl:request>
+							<wadl:response status="200">
+								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpProperties" />
+							</wadl:response>
+							<wadl:response status="400" />
+							<wadl:response status="401" />
+							<wadl:response status="403" />
+							<wadl:response status="404" />
+						</wadl:method>
+						<wadl:method name="GET" id="getPdpProperties">
+							<wadl:doc>Get PDP properties, not only writable (root policy reference) but also read-only status such as time of last modification, currently active policies, etc.</wadl:doc>
+							<wadl:request />
+							<wadl:response status="200">
+								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpProperties" />
+							</wadl:response>
+							<wadl:response status="401" />
+							<wadl:response status="403" />
+							<wadl:response status="404" />
+						</wadl:method>
+					</wadl:resource>
 					<wadl:resource id="policiesResource" path="policies">
 						<wadl:doc>Policy resources</wadl:doc>
 						<wadl:method name="POST" id="addPolicy">
@@ -223,45 +242,6 @@
 								<wadl:representation mediaType="application/xml" element="az:attributeProviders" />
 							</wadl:response>
 							<wadl:response status="400" />
-							<wadl:response status="401" />
-							<wadl:response status="403" />
-							<wadl:response status="404" />
-						</wadl:method>
-					</wadl:resource>
-					<wadl:resource id="pdpPropertiesResource" path="properties">
-						<wadl:doc>Miscellaneous modifiable PDP properties</wadl:doc>
-						<wadl:method name="PUT" id="updateOtherPdpProperties">
-							<wadl:doc>Update PDP properties</wadl:doc>
-							<wadl:request>
-								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpProperties" />
-							</wadl:request>
-							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpProperties" />
-							</wadl:response>
-							<wadl:response status="400" />
-							<wadl:response status="401" />
-							<wadl:response status="403" />
-							<wadl:response status="404" />
-						</wadl:method>
-						<wadl:method name="GET" id="getPdpProperties">
-							<wadl:doc>Get PDP properties</wadl:doc>
-							<wadl:request />
-							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpProperties" />
-							</wadl:response>
-							<wadl:response status="401" />
-							<wadl:response status="403" />
-							<wadl:response status="404" />
-						</wadl:method>
-					</wadl:resource>
-					<wadl:resource id="pdpStatusResource" path="status">
-						<wadl:doc>PDP status</wadl:doc>
-						<wadl:method name="GET" id="getPdpStatus">
-							<wadl:doc>Get PDP status</wadl:doc>
-							<wadl:request />
-							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpStatus" />
-							</wadl:response>
 							<wadl:response status="401" />
 							<wadl:response status="403" />
 							<wadl:response status="404" />

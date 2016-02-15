@@ -19,6 +19,8 @@
     along with AuthZForce CE.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
+<!-- Copyright (C) 2012-2016 Thales Services SAS. This file is part of AuthZForce CE. AuthZForce CE is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. AuthZForce CE is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with AuthZForce CE. If not, see <http://www.gnu.org/licenses/>. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:tns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" version="5.0">
 	<xs:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" />
 	<xs:import namespace="http://www.w3.org/2005/Atom" />
@@ -100,7 +102,10 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="domain" type="tns:DomainResourceContent" />
-	<xs:complexType name="PdpProperties">
+	<xs:complexType name="PdpPropertiesUpdate">
+		<xs:annotation>
+			<xs:documentation>Writable/updatable PDP properties</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="rootPolicyRef" type="xacml:IdReferenceType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
@@ -109,6 +114,28 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="pdpPropertiesUpdate" type="tns:PdpPropertiesUpdate" />
+	<xs:complexType name="PdpProperties">
+		<xs:annotation>
+			<xs:documentation>All (writable and read-only) PDP properties</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:PdpPropertiesUpdate">
+				<xs:sequence>
+					<xs:element name="enabledPolicy" type="xacml:IdReferenceType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Enabled policy. A policy is enabled if it is the root policy or a policy referenced (directly or indirectly) via XACML PolicySetIdReference from the root policy.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="lastModified" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>Date/time of last modification of the PDP, due to change of policies, attribute providers, etc.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:element name="pdpProperties" type="tns:PdpProperties" />
 	<xs:complexType name="AttributeProviderList">
 		<xs:sequence>
@@ -116,21 +143,6 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="attributeProviders" type="tns:AttributeProviderList" />
-	<xs:complexType name="PdpStatus">
-		<xs:sequence>
-			<xs:element name="enabledPolicy" type="xacml:IdReferenceType" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Enabled policy. A policy is enabled if it is the root policy or a policy referenced (directly or indirectly) via XACML PolicySetIdReference from the root policy.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-		<xs:attribute name="lastModified" type="xs:dateTime">
-			<xs:annotation>
-				<xs:documentation>Date/time of last modification of the PDP, due to change of policies, attribute providers, etc.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:element name="pdpStatus" type="tns:PdpStatus" />
 	<xs:simpleType name="VersionId">
 		<xs:annotation>
 			<xs:documentation>Version ID is either a XACML version string or "latest". The latter is a special keyword meaning the latest version.</xs:documentation>
