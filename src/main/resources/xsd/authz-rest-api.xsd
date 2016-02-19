@@ -107,7 +107,7 @@
 			<xs:documentation>Writable/updatable PDP properties</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="rootPolicyRef" type="xacml:IdReferenceType" minOccurs="0" maxOccurs="1">
+			<xs:element name="rootPolicyRef" type="xacml:IdReferenceType">
 				<xs:annotation>
 					<xs:documentation>Reference to the root policy enforced by the PDP. This policy and any other policy referenced (directly or indirectly) from it via XACML PolicySetIdReference must correspond to a resource under URL path '/policies'.</xs:documentation>
 				</xs:annotation>
@@ -128,7 +128,7 @@
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
-				<xs:attribute name="lastModified" type="xs:dateTime">
+				<xs:attribute name="lastModified" type="xs:dateTime" use="required">
 					<xs:annotation>
 						<xs:documentation>Date/time of last modification of the PDP, due to change of policies, attribute providers, etc.</xs:documentation>
 					</xs:annotation>
