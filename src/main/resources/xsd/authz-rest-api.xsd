@@ -128,7 +128,7 @@
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
-				<xs:attribute name="lastModified" type="xs:dateTime" use="required">
+				<xs:attribute name="lastModifiedTime" type="xs:dateTime" use="required">
 					<xs:annotation>
 						<xs:documentation>Date/time of last modification of the PDP, due to change of policies, attribute providers, etc.</xs:documentation>
 					</xs:annotation>
