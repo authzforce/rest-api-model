@@ -110,7 +110,7 @@
 					<wadl:resource id="pdpPropertiesResource" path="properties">
 						<wadl:doc>Miscellaneous PDP properties, including the root policy reference</wadl:doc>
 						<wadl:method name="PUT" id="updateOtherPdpProperties">
-							<wadl:doc>Update PDP properties</wadl:doc>
+							<wadl:doc>Update miscellaneous PDP properties</wadl:doc>
 							<wadl:request>
 								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpPropertiesUpdate" />
 							</wadl:request>
@@ -122,8 +122,8 @@
 							<wadl:response status="403" />
 							<wadl:response status="404" />
 						</wadl:method>
-						<wadl:method name="GET" id="getPdpProperties">
-							<wadl:doc>Get PDP properties, not only writable (root policy reference) but also read-only status such as time of last modification, currently active policies, etc.</wadl:doc>
+						<wadl:method name="GET" id="getOtherPdpProperties">
+							<wadl:doc>Get miscellaneous PDP properties, not only writable (root policy reference) but also read-only status such as time of last modification, currently active policies, etc.</wadl:doc>
 							<wadl:request />
 							<wadl:response status="200">
 								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpProperties" />
