@@ -19,8 +19,6 @@
     along with AuthZForce CE.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<!-- Copyright (C) 2012-2016 Thales Services SAS. This file is part of AuthZForce CE. AuthZForce CE is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. AuthZForce CE is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with AuthZForce CE. If not, see <http://www.gnu.org/licenses/>. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:tns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" version="5.0">
 	<xs:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" />
 	<xs:import namespace="http://www.w3.org/2005/Atom" />
@@ -109,7 +107,7 @@
 		<xs:sequence>
 			<xs:element name="rootPolicyRef" type="xacml:IdReferenceType">
 				<xs:annotation>
-					<xs:documentation>Reference to the root policy enforced by the PDP. This policy and any other policy referenced (directly or indirectly) from it via XACML PolicySetIdReference must correspond to a resource under URL path '/policies'.</xs:documentation>
+					<xs:documentation>Reference (with version constraints) to a policy to be enforced by the PDP as root policy. This policy and any other policy referenced (directly or indirectly) from it via XACML PolicySetIdReference must correspond to a resource under URL path '/policies'.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -119,22 +117,23 @@
 		<xs:annotation>
 			<xs:documentation>All (writable and read-only) PDP properties</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="tns:PdpPropertiesUpdate">
-				<xs:sequence>
-					<xs:element name="enabledPolicy" type="xacml:IdReferenceType" maxOccurs="unbounded">
-						<xs:annotation>
-							<xs:documentation>Enabled policy. A policy is enabled if it is the root policy or a policy referenced (directly or indirectly) via XACML PolicySetIdReference from the root policy.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-				<xs:attribute name="lastModifiedTime" type="xs:dateTime" use="optional">
-					<xs:annotation>
-						<xs:documentation>Date/time of last modification of the PDP, due to change of policies, attribute providers, etc.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element name="rootPolicyRef" type="xacml:IdReferenceType">
+				<xs:annotation>
+					<xs:documentation>Root policy reference.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refPolicyRef" type="xacml:IdReferenceType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Policy referenced (directly or indirectly) from the root policy via XACML PolicySetIdReference.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="lastModifiedTime" type="xs:dateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation>Date/time of last modification of the PDP, due to change of policies, attribute providers, etc.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:element name="pdpProperties" type="tns:PdpProperties" />
 	<xs:complexType name="AttributeProviderList">
