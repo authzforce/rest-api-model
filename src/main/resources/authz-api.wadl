@@ -16,22 +16,22 @@
 			<wadl:method name="POST" id="addDomain">
 				<wadl:doc>Create managed resource for the administration domain</wadl:doc>
 				<wadl:request>
-					<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:domainProperties">
+					<wadl:representation mediaType="application/fastinfoset" element="az:domainProperties">
 						<wadl:doc>
 							New domain properties. A default root policy is automatically created for the domain and a corresponding rootPolicyRef set by the Service Provider of this API (see resource 'pdpPropertiesResource').
 						</wadl:doc>
 					</wadl:representation>
-					<wadl:representation mediaType="application/fastinfoset" element="az:domainProperties">
+					<wadl:representation mediaType="application/xml" element="az:domainProperties">
 						<wadl:doc>
 							New domain properties. A default root policy is automatically created for the domain and a corresponding rootPolicyRef set by the Service Provider of this API (see resource 'pdpPropertiesResource').
 						</wadl:doc>
 					</wadl:representation>
 				</wadl:request>
 				<wadl:response status="200">
-					<wadl:representation mediaType="application/xml" element="atom:link">
+					<wadl:representation mediaType="application/fastinfoset" element="atom:link">
 						<wadl:doc>Link to created domain resource</wadl:doc>
 					</wadl:representation>
-					<wadl:representation mediaType="application/fastinfoset" element="atom:link">
+					<wadl:representation mediaType="application/xml" element="atom:link">
 						<wadl:doc>Link to created domain resource</wadl:doc>
 					</wadl:representation>
 				</wadl:response>
@@ -49,8 +49,8 @@
 					</wadl:param>
 				</wadl:request>
 				<wadl:response status="200">
-					<wadl:representation mediaType="application/xml" element="az:resources" />
 					<wadl:representation mediaType="application/fastinfoset" element="az:resources" />
+					<wadl:representation mediaType="application/xml" element="az:resources" />
 				</wadl:response>
 				<wadl:response status="401" />
 				<wadl:response status="403" />
@@ -64,8 +64,8 @@
 				<wadl:method name="GET" id="getDomain">
 					<wadl:request />
 					<wadl:response status="200">
-						<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:domain" />
 						<wadl:representation mediaType="application/fastinfoset" element="az:domain" />
+						<wadl:representation mediaType="application/xml" element="az:domain" />
 					</wadl:response>
 					<wadl:response status="401" />
 					<wadl:response status="403" />
@@ -74,10 +74,10 @@
 				<wadl:method name="DELETE" id="deleteDomain">
 					<wadl:request />
 					<wadl:response status="200">
-						<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:domainProperties">
+						<wadl:representation mediaType="application/fastinfoset" element="az:domainProperties">
 							<wadl:doc>Deleted policy domain properties</wadl:doc>
 						</wadl:representation>
-						<wadl:representation mediaType="application/fastinfoset" element="az:domainProperties">
+						<wadl:representation mediaType="application/xml" element="az:domainProperties">
 							<wadl:doc>Deleted policy domain properties</wadl:doc>
 						</wadl:representation>
 					</wadl:response>
@@ -89,8 +89,8 @@
 					<wadl:method name="GET" id="getDomainProperties">
 						<wadl:request />
 						<wadl:response status="200">
-							<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:domainProperties" />
 							<wadl:representation mediaType="application/fastinfoset" element="az:domainProperties" />
+							<wadl:representation mediaType="application/xml" element="az:domainProperties" />
 						</wadl:response>
 						<wadl:response status="401" />
 						<wadl:response status="403" />
@@ -99,12 +99,12 @@
 					<wadl:method name="PUT" id="updateDomainProperties">
 						<wadl:doc>Update policy domain properties</wadl:doc>
 						<wadl:request>
-							<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:domainProperties" />
 							<wadl:representation mediaType="application/fastinfoset" element="az:domainProperties" />
+							<wadl:representation mediaType="application/xml" element="az:domainProperties" />
 						</wadl:request>
 						<wadl:response status="200">
-							<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:domainProperties" />
 							<wadl:representation mediaType="application/fastinfoset" element="az:domainProperties" />
+							<wadl:representation mediaType="application/xml" element="az:domainProperties" />
 						</wadl:response>
 						<wadl:response status="400" />
 						<wadl:response status="401" />
@@ -117,8 +117,8 @@
 					<wadl:method name="GET" id="getPAP">
 						<wadl:request />
 						<wadl:response status="200">
-							<wadl:representation mediaType="application/xml" element="az:resourceContent" />
 							<wadl:representation mediaType="application/fastinfoset" element="az:resourceContent" />
+							<wadl:representation mediaType="application/xml" element="az:resourceContent" />
 						</wadl:response>
 						<wadl:response status="401" />
 						<wadl:response status="404" />
@@ -129,12 +129,12 @@
 						<wadl:method name="PUT" id="updateOtherPdpProperties">
 							<wadl:doc>Update miscellaneous PDP properties</wadl:doc>
 							<wadl:request>
-								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpPropertiesUpdate" />
 								<wadl:representation mediaType="application/fastinfoset" element="az:pdpPropertiesUpdate" />
+								<wadl:representation mediaType="application/xml" element="az:pdpPropertiesUpdate" />
 							</wadl:request>
 							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpProperties" />
 								<wadl:representation mediaType="application/fastinfoset" element="az:pdpProperties" />
+								<wadl:representation mediaType="application/xml" element="az:pdpProperties" />
 							</wadl:response>
 							<wadl:response status="400" />
 							<wadl:response status="401" />
@@ -145,8 +145,8 @@
 							<wadl:doc>Get miscellaneous PDP properties, not only writable (root policy reference) but also read-only status such as time of last modification, currently active policies, etc.</wadl:doc>
 							<wadl:request />
 							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml; charset=UTF-8" element="az:pdpProperties" />
 								<wadl:representation mediaType="application/fastinfoset" element="az:pdpProperties" />
+								<wadl:representation mediaType="application/xml" element="az:pdpProperties" />
 							</wadl:response>
 							<wadl:response status="401" />
 							<wadl:response status="403" />
@@ -158,14 +158,14 @@
 						<wadl:method name="POST" id="addPolicy">
 							<wadl:doc>Add policy to the domain</wadl:doc>
 							<wadl:request>
-								<wadl:representation mediaType="application/xml; charset=UTF-8" element="xacml:PolicySet" />
 								<wadl:representation mediaType="application/fastinfoset" element="xacml:PolicySet" />
+								<wadl:representation mediaType="application/xml" element="xacml:PolicySet" />
 							</wadl:request>
 							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml" element="atom:link">
+								<wadl:representation mediaType="application/fastinfoset" element="atom:link">
 									<wadl:doc>Link to created managed Policy resource</wadl:doc>
 								</wadl:representation>
-								<wadl:representation mediaType="application/fastinfoset" element="atom:link">
+								<wadl:representation mediaType="application/xml" element="atom:link">
 									<wadl:doc>Link to created managed Policy resource</wadl:doc>
 								</wadl:representation>
 							</wadl:response>
@@ -181,8 +181,8 @@
 							<wadl:doc>Get policies.</wadl:doc>
 							<wadl:request />
 							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml" element="az:resources" />
 								<wadl:representation mediaType="application/fastinfoset" element="az:resources" />
+								<wadl:representation mediaType="application/xml" element="az:resources" />
 							</wadl:response>
 							<wadl:response status="401" />
 							<wadl:response status="403" />
@@ -197,8 +197,8 @@
 								<wadl:doc>Get policy versions.</wadl:doc>
 								<wadl:request />
 								<wadl:response status="200">
-									<wadl:representation mediaType="application/xml" element="az:resources" />
 									<wadl:representation mediaType="application/fastinfoset" element="az:resources" />
+									<wadl:representation mediaType="application/xml" element="az:resources" />
 								</wadl:response>
 								<wadl:response status="401" />
 								<wadl:response status="403" />
@@ -208,10 +208,10 @@
 								<wadl:doc>Delete policy (all versions)</wadl:doc>
 								<wadl:request />
 								<wadl:response status="200">
-									<wadl:representation mediaType="application/xml" element="az:resources">
+									<wadl:representation mediaType="application/fastinfoset" element="az:resources">
 										<wadl:doc>Deleted policy versions</wadl:doc>
 									</wadl:representation>
-									<wadl:representation mediaType="application/fastinfoset" element="az:resources">
+									<wadl:representation mediaType="application/xml" element="az:resources">
 										<wadl:doc>Deleted policy versions</wadl:doc>
 									</wadl:representation>
 								</wadl:response>
@@ -228,8 +228,8 @@
 									<wadl:doc>Get policy version</wadl:doc>
 									<wadl:request />
 									<wadl:response status="200">
-										<wadl:representation mediaType="application/xml; charset=UTF-8" element="xacml:PolicySet" />
 										<wadl:representation mediaType="application/fastinfoset" element="xacml:PolicySet" />
+										<wadl:representation mediaType="application/xml" element="xacml:PolicySet" />
 									</wadl:response>
 									<wadl:response status="401" />
 									<wadl:response status="403" />
@@ -239,10 +239,10 @@
 									<wadl:doc>Delete policy version. If this the last remaining version, then this has the same effect as method 'deletePolicy'.</wadl:doc>
 									<wadl:request />
 									<wadl:response status="200">
-										<wadl:representation mediaType="application/xml; charset=UTF-8" element="xacml:PolicySet">
+										<wadl:representation mediaType="application/fastinfoset" element="xacml:PolicySet">
 											<wadl:doc>Deleted policy version</wadl:doc>
 										</wadl:representation>
-										<wadl:representation mediaType="application/fastinfoset" element="xacml:PolicySet">
+										<wadl:representation mediaType="application/xml" element="xacml:PolicySet">
 											<wadl:doc>Deleted policy version</wadl:doc>
 										</wadl:representation>
 									</wadl:response>
@@ -261,8 +261,8 @@
 						<wadl:method name="GET" id="getAttributeProviderList">
 							<wadl:request />
 							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml" element="az:attributeProviders" />
 								<wadl:representation mediaType="application/fastinfoset" element="az:attributeProviders" />
+								<wadl:representation mediaType="application/xml" element="az:attributeProviders" />
 							</wadl:response>
 							<wadl:response status="401" />
 							<wadl:response status="403" />
@@ -270,12 +270,12 @@
 						</wadl:method>
 						<wadl:method name="PUT" id="updateAttributeProviderList">
 							<wadl:request>
-								<wadl:representation mediaType="application/xml" element="az:attributeProviders" />
 								<wadl:representation mediaType="application/fastinfoset" element="az:attributeProviders" />
+								<wadl:representation mediaType="application/xml" element="az:attributeProviders" />
 							</wadl:request>
 							<wadl:response status="200">
-								<wadl:representation mediaType="application/xml" element="az:attributeProviders" />
 								<wadl:representation mediaType="application/fastinfoset" element="az:attributeProviders" />
+								<wadl:representation mediaType="application/xml" element="az:attributeProviders" />
 							</wadl:response>
 							<wadl:response status="400" />
 							<wadl:response status="401" />
@@ -288,13 +288,12 @@
 					<wadl:doc>XACML Policy Decision Point</wadl:doc>
 					<wadl:method name="POST" id="requestPolicyDecision">
 						<wadl:request>
-							<wadl:representation mediaType="application/xml" element="xacml:Request" />
-							<wadl:representation mediaType="text/xml" element="xacml:Request" />
 							<wadl:representation mediaType="application/fastinfoset" element="xacml:Request" />
+							<wadl:representation mediaType="application/xml" element="xacml:Request" />
 						</wadl:request>
 						<wadl:response status="200">
-							<wadl:representation mediaType="application/xml" element="xacml:Response" />
 							<wadl:representation mediaType="application/fastinfoset" element="xacml:Response" />
+							<wadl:representation mediaType="application/xml" element="xacml:Response" />
 						</wadl:response>
 						<wadl:response status="400" />
 						<wadl:response status="401" />
