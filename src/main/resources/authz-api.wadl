@@ -124,7 +124,7 @@
 						<wadl:response status="404" />
 						<wadl:response status="403" />
 					</wadl:method>
-					<wadl:resource id="pdpPropertiesResource" path="properties">
+					<wadl:resource id="pdpPropertiesResource" path="pdp.properties">
 						<wadl:doc>Miscellaneous PDP properties, including the root policy reference</wadl:doc>
 						<wadl:method name="PUT" id="updateOtherPdpProperties">
 							<wadl:doc>Update miscellaneous PDP properties</wadl:doc>
@@ -147,6 +147,35 @@
 							<wadl:response status="200">
 								<wadl:representation mediaType="application/fastinfoset" element="az:pdpProperties" />
 								<wadl:representation mediaType="application/xml" element="az:pdpProperties" />
+							</wadl:response>
+							<wadl:response status="401" />
+							<wadl:response status="403" />
+							<wadl:response status="404" />
+						</wadl:method>
+					</wadl:resource>
+					<wadl:resource id="prpPropertiesResource" path="prp.properties">
+						<wadl:doc>Miscellaneous PRP (Policy Repository) properties</wadl:doc>
+						<wadl:method name="PUT" id="updateOtherPrpProperties">
+							<wadl:doc>Update miscellaneous PRP properties</wadl:doc>
+							<wadl:request>
+								<wadl:representation mediaType="application/fastinfoset" element="az:prpProperties" />
+								<wadl:representation mediaType="application/xml" element="az:prpProperties" />
+							</wadl:request>
+							<wadl:response status="200">
+								<wadl:representation mediaType="application/fastinfoset" element="az:prpProperties" />
+								<wadl:representation mediaType="application/xml" element="az:prpProperties" />
+							</wadl:response>
+							<wadl:response status="400" />
+							<wadl:response status="401" />
+							<wadl:response status="403" />
+							<wadl:response status="404" />
+						</wadl:method>
+						<wadl:method name="GET" id="getOtherPrpProperties">
+							<wadl:doc>Get miscellaneous PRP properties, not only writable (root policy reference) but also read-only.</wadl:doc>
+							<wadl:request />
+							<wadl:response status="200">
+								<wadl:representation mediaType="application/fastinfoset" element="az:prpProperties" />
+								<wadl:representation mediaType="application/xml" element="az:prpProperties" />
 							</wadl:response>
 							<wadl:response status="401" />
 							<wadl:response status="403" />

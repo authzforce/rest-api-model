@@ -205,6 +205,8 @@
 										<extraarg>-tMap</extraarg>
 										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}pdpProperties=org.ow2.authzforce.rest.api.xmlns.PdpProperties</extraarg>
 										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}prpProperties=org.ow2.authzforce.rest.api.xmlns.PrpProperties</extraarg>
+										<extraarg>-tMap</extraarg>
 										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}attributeProviders=org.ow2.authzforce.rest.api.xmlns.AttributeProviders</extraarg>
 									</extraargs>
 								</wadlOption>
