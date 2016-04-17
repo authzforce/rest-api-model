@@ -123,9 +123,9 @@
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="rootPolicyRef" type="xacml:IdReferenceType">
+			<xs:element name="rootPolicyRefExpression" type="xacml:IdReferenceType">
 				<xs:annotation>
-					<xs:documentation>Reference pattern (with version constraints) to a policy
+					<xs:documentation>Reference expression (with version pattern(s)) to a policy
 						to be enforced by the PDP as root policy. This policy and any
 						other policy referenced (directly or indirectly) from it via XACML
 						PolicySetIdReference must correspond to a resource under URL path
