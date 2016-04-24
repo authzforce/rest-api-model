@@ -6,7 +6,7 @@
 		<version>3.3.7</version>
 	</parent>
 	<artifactId>authzforce-ce-rest-api-model</artifactId>
-	<version>4.3.0</version>
+	<version>5.0.0</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>AuthzForce CE - Generic REST API model for Authorization PDPs</description>
 	<url>https://github.com/authzforce/rest-api-model</url>
@@ -187,23 +187,27 @@
 										<extraarg>-tMap</extraarg>
 										<extraarg>{urn:oasis:names:tc:xacml:3.0:core:schema:wd-17}PolicySet=oasis.names.tc.xacml._3_0.core.schema.wd_17.PolicySet</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{urn:oasis:names:tc:xacml:3.0:core:schema:wd-17}Target=oasis.names.tc.xacml._3_0.core.schema.wd_17.Target</extraarg>
-										<extraarg>-tMap</extraarg>
 										<extraarg>{urn:oasis:names:tc:xacml:3.0:core:schema:wd-17}Request=oasis.names.tc.xacml._3_0.core.schema.wd_17.Request</extraarg>
 										<extraarg>-tMap</extraarg>
 										<extraarg>{urn:oasis:names:tc:xacml:3.0:core:schema:wd-17}Response=oasis.names.tc.xacml._3_0.core.schema.wd_17.Response</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}properties=org.ow2.authzforce.rest.api.xmlns.ManagedResourceProperties</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}properties=org.ow2.authzforce.rest.api.xmlns.ManagedResourceProperties</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}resourceContent=org.ow2.authzforce.rest.api.xmlns.ResourceContent</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}resourceContent=org.ow2.authzforce.rest.api.xmlns.ResourceContent</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}resources=org.ow2.authzforce.rest.api.xmlns.Resources</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}resources=org.ow2.authzforce.rest.api.xmlns.Resources</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}domainProperties=org.ow2.authzforce.rest.api.xmlns.DomainProperties</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}domainProperties=org.ow2.authzforce.rest.api.xmlns.DomainProperties</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}domain=org.ow2.authzforce.rest.api.xmlns.Domain</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}domain=org.ow2.authzforce.rest.api.xmlns.Domain</extraarg>
 										<extraarg>-tMap</extraarg>
-										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/4}attributeProviders=org.ow2.authzforce.rest.api.xmlns.AttributeProviders</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}pdpPropertiesUpdate=org.ow2.authzforce.rest.api.xmlns.PdpPropertiesUpdate</extraarg>
+										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}pdpProperties=org.ow2.authzforce.rest.api.xmlns.PdpProperties</extraarg>
+										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}prpProperties=org.ow2.authzforce.rest.api.xmlns.PrpProperties</extraarg>
+										<extraarg>-tMap</extraarg>
+										<extraarg>{http://authzforce.github.io/rest-api-model/xmlns/authz/5}attributeProviders=org.ow2.authzforce.rest.api.xmlns.AttributeProviders</extraarg>
 									</extraargs>
 								</wadlOption>
 							</wadlOptions>
