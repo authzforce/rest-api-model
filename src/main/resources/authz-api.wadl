@@ -282,7 +282,7 @@
 							</wadl:resource>
 						</wadl:resource>
 					</wadl:resource>
-					<wadl:resource id="attributeProvidersResource" path="attributeProviders">
+					<wadl:resource id="attributeProvidersResource" path="attribute.providers">
 						<wadl:doc>Attribute Providers to be used by the PDP for getting attributes defined in policies
 							that
 							may not be provided by the PEP (in the XACML request).
