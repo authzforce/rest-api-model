@@ -1,7 +1,7 @@
 # Change log
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
-## Unreleased
+## 5.0.0
 ### Added
 - URL path specific to PDP properties:
 	- GET /domains/{domainId}/pap/pdp.properties gives properties of the PDP, including date/time of last modification and active/applicable policies (root policy and policies referenced directly/indirectly from root)
