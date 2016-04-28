@@ -1,6 +1,9 @@
 # Change log
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
+## 5.1.0
+WADL defines "application/xml" representation type always before "application/fastinfoset" to make "application/xml" the default Content-Type produced by REST implementation when no particular Accept header is specified by clients.
+
 ## 5.0.0
 ### Added
 - URL path specific to PDP properties:
