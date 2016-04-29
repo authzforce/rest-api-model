@@ -1,6 +1,12 @@
 # Change log
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
+## 5.1.1
+### Fixed
+REST API implementations no longer forced to support FastInfoset, with WADL split in two:
+- Master WADL without 'application/fastinfoset' mediatype (authz-api.wadl)
+- New WADL with 'application/fastinfoset' mediatype (authz-api.fastinfoset.wadl), generated from master wadl
+
 ## 5.1.0
 WADL defines "application/xml" representation type always before "application/fastinfoset" to make "application/xml" the default Content-Type produced by REST implementation when no particular Accept header is specified by clients.
 
