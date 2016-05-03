@@ -1,4 +1,7 @@
-# How to make a release
+# How to report issues
+Use the Issues tab on the Github repository.
+
+# How to make a release (for committers only)
 
 1. From the develop branch, run: `$ mvn jgitflow:release-start`
 1. Update the CHANGELOG according to keepachangelog.com.
