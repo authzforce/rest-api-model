@@ -19,268 +19,277 @@
     along with AuthZForce CE.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:tns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" version="5.1.1">
-	<xs:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" />
-	<xs:import namespace="http://www.w3.org/2005/Atom" />
-	<xs:import namespace="http://authzforce.github.io/xmlns/pdp/ext/3" />
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:tns="http://authzforce.github.io/rest-api-model/xmlns/authz/5"
+   xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" version="5.2.0">
+   <xs:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" />
+   <xs:import namespace="http://www.w3.org/2005/Atom" />
+   <xs:import namespace="http://authzforce.github.io/xmlns/pdp/ext/3" />
 
-	<xs:complexType name="ManagedResourceProperties">
-		<xs:sequence>
-			<xs:element name="description" type="xs:string" minOccurs="0" />
-		</xs:sequence>
-		<xs:attribute name="externalId" type="xs:NMTOKEN" use="optional">
-			<xs:annotation>
-				<xs:documentation xml:lang="en">
-					Same function as in SCIM
-					schema:
-					An identifier for the Resource as defined by the Service
-					Consumer. The externalId may simplify identification of the
-					Resource between Service Consumer and Service
-					provider by allowing
-					the Consumer
-					to refer to the Resource with its own identifier,
-					obviating the need to store a local mapping between the local
-					identifier of the Resource and the identifier
-					used by the Service
-					Provider. Each
-					Resource MAY include a non-empty
-					externalId value. The
-					value of the externalId attribute is always issued be the
-					Service
-					Consumer and can never be specified by
-					the Service Provider. The
-					Service
-					Provider MUST always interpret the externalId as scoped to
-					the Service Consumer's tenant.
-				</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="ManagedResourceContent">
-		<xs:annotation>
-			<xs:documentation>
-				Information about resource managed with this API
-			</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="properties" type="tns:ManagedResourceProperties" minOccurs="0" maxOccurs="1" />
-			<xs:element name="childResources" type="tns:ManagedResourceSet" minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="resourceContent" type="tns:ManagedResourceContent" />
-	<xs:complexType name="ManagedResourceSet">
-		<xs:annotation>
-			<xs:documentation>
-				Set of resources managed with this API
-			</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element ref="atom:link" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Link to resource
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="resources" type="tns:ManagedResourceSet" />
+   <xs:complexType name="ManagedResourceProperties">
+      <xs:sequence>
+         <xs:element name="description" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="externalId" type="xs:NMTOKEN" use="optional">
+         <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Same function as in SCIM
+               schema:
+               An identifier for the Resource as defined by the Service
+               Consumer. The externalId may simplify identification of the
+               Resource between Service Consumer and Service
+               provider by allowing
+               the Consumer
+               to refer to the Resource with its own identifier,
+               obviating the need to store a local mapping between the local
+               identifier of the Resource and the identifier
+               used by the Service
+               Provider. Each
+               Resource MAY include a non-empty
+               externalId value. The
+               value of the externalId attribute is always issued be the
+               Service
+               Consumer and can never be specified by
+               the Service Provider. The
+               Service
+               Provider MUST always interpret the externalId as scoped to
+               the Service Consumer's tenant.
+            </xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="ManagedResourceContent">
+      <xs:annotation>
+         <xs:documentation>
+            Information about resource managed with this API
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="properties" type="tns:ManagedResourceProperties" minOccurs="0" maxOccurs="1" />
+         <xs:element name="childResources" type="tns:ManagedResourceSet" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="resourceContent" type="tns:ManagedResourceContent" />
+   <xs:complexType name="ManagedResourceSet">
+      <xs:annotation>
+         <xs:documentation>
+            Set of resources managed with this API
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element ref="atom:link" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Link to resource
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="resources" type="tns:ManagedResourceSet" />
 
-	<xs:annotation>
-		<xs:documentation xml:lang="en">
-			Data Model for RESTful API
-			of Authorization
-			Service
-		</xs:documentation>
-	</xs:annotation>
-	<xs:complexType name="DomainProperties">
-		<xs:complexContent>
-			<xs:extension base="tns:ManagedResourceProperties" />
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:element name="domainProperties" type="tns:DomainProperties" />
-	<xs:complexType name="DomainResourceContent">
-		<xs:annotation>
-			<xs:documentation>
-				Content of domain resource managed with this API
-			</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="properties" type="tns:DomainProperties" />
-			<xs:element name="childResources" type="tns:ManagedResourceSet" minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="domain" type="tns:DomainResourceContent" />
-	<xs:group name="pdpRWPropertyElements">
-		<xs:annotation>
-			<xs:documentation>Writable (and readable) properties of the domain's
-				policy service: PRP, PDP, etc.
-			</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="feature" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Extra implementation-specific feature ID
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="rootPolicyRefExpression" type="xacml:IdReferenceType">
-				<xs:annotation>
-					<xs:documentation>Reference expression (with version pattern(s)) to a policy
-						to be enforced by the PDP as root policy. This policy and any
-						other policy referenced (directly or indirectly) from it via XACML
-						PolicySetIdReference must correspond to a resource under URL path
-						'/policies'.
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:group>
-	<xs:complexType name="PdpPropertiesUpdate">
-		<xs:annotation>
-			<xs:documentation>Writable/updatable PDP properties
-			</xs:documentation>
-		</xs:annotation>
-		<xs:group ref="tns:pdpRWPropertyElements" />
-	</xs:complexType>
-	<xs:element name="pdpPropertiesUpdate" type="tns:PdpPropertiesUpdate">
-		<xs:unique name="updated-feature-id-uniqueness">
-			<xs:selector xpath="feature" />
-			<xs:field xpath="." />
-		</xs:unique>
-	</xs:element>
-	<xs:complexType name="ApplicablePolicies">
-		<xs:annotation>
-			<xs:documentation>
-				Policies actually applicable/in force by a PDP
-			</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="rootPolicyRef" type="xacml:IdReferenceType">
-				<xs:annotation>
-					<xs:documentation>Fixed reference (PolicySetId and constant Version) to the policy
-						actually enforced by the PDP as root policy, after resolving the rootPolicyRef pattern defined as part of the 'pdpRWPropertyElements' group.
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="refPolicyRef" type="xacml:IdReferenceType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Policy referenced (directly or indirectly) from
-						the root policy - identified above by 'rootPolicyRef' element - via XACML PolicySetIdReference. In this context,
-						the Version must be
-						statically defined, i.e. the actual resolved
-						version identifier (used by the PDP) must be
-						specified, no version
-						pattern may be used.
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="PdpProperties">
-		<xs:annotation>
-			<xs:documentation>All (writable and read-only) PDP properties
-			</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:group ref="tns:pdpRWPropertyElements">
-				<xs:annotation>
-					<xs:documentation>In this context, the rootPolicyRef must be
-						statically defined, i.e. the actual resolved version identifier
-						(used by the PDP) must be
-						specified, no Version pattern may be
-						used.
-					</xs:documentation>
-				</xs:annotation>
-			</xs:group>
-			<xs:element name="applicablePolicies" type="tns:ApplicablePolicies">
-				<xs:annotation>
-					<xs:documentation>Policies applicable by the PDP</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-		<xs:attribute name="lastModifiedTime" type="xs:dateTime" use="optional">
-			<xs:annotation>
-				<xs:documentation>Date/time of last modification of the PDP, due to
-					change of policies, attribute providers, etc.
-				</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:element name="pdpProperties" type="tns:PdpProperties">
-		<xs:unique name="feature-id-uniqueness">
-			<xs:selector xpath="feature" />
-			<xs:field xpath="." />
-		</xs:unique>
-		<xs:unique name="refPolicyRef-uniqueness">
-			<xs:selector xpath="applicablePolicies/refPolicyRef" />
-			<xs:field xpath="." />
-		</xs:unique>
-	</xs:element>
-	<xs:complexType name="PrpProperties">
-		<xs:annotation>
-			<xs:documentation>All (writable and read-only) PRP (Policy
-				Repository) properties
-			</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="maxPolicyCount" type="xs:positiveInteger" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Maximum number of policies. No limit if this
-						element is missing.
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="maxVersionCountPerPolicy" type="xs:positiveInteger" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Maximum number of versions per policy. No limit
-						if this element is missing.
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="versionRollingEnabled" type="xs:boolean" default="false" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>True iff versions are automatically removed to
-						keep the number of versions under 'maxVersionCountPerPolicy',
-						especially when this max is already reached. The strategy for
-						removing versions is implementation-specific; e.g. implementations
-						may remove the oldest versions first.
-						Implementations must make
-						sure it does not
-						break the 'rootPolicyRef' defined previously or
-						any Policy
-						reference from it (direct or indirect).
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="prpProperties" type="tns:PrpProperties" />
-	<xs:complexType name="AttributeProviderList">
-		<xs:sequence>
-			<xs:element name="attributeProvider" type="authz-ext:AbstractAttributeProvider" minOccurs="0" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="attributeProviders" type="tns:AttributeProviderList" />
-	<xs:simpleType name="VersionId">
-		<xs:annotation>
-			<xs:documentation>Version ID is either a XACML version string or
-				"latest". The latter is a special keyword meaning the latest
-				version.
-			</xs:documentation>
-		</xs:annotation>
-		<xs:union memberTypes="xacml:VersionType">
-			<xs:simpleType>
-				<xs:restriction base="xs:NMTOKEN">
-					<xs:enumeration value="latest" />
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:union>
-	</xs:simpleType>
-	<xs:element name="error">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="message" type="xs:string" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+   <xs:annotation>
+      <xs:documentation xml:lang="en">
+         Data Model for RESTful API
+         of Authorization
+         Service
+      </xs:documentation>
+   </xs:annotation>
+   <xs:complexType name="DomainProperties">
+      <xs:complexContent>
+         <xs:extension base="tns:ManagedResourceProperties" />
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="domainProperties" type="tns:DomainProperties" />
+   <xs:complexType name="DomainResourceContent">
+      <xs:annotation>
+         <xs:documentation>
+            Content of domain resource managed with this API
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="properties" type="tns:DomainProperties" />
+         <xs:element name="childResources" type="tns:ManagedResourceSet" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="domain" type="tns:DomainResourceContent" />
+   <xs:complexType name="Feature">
+      <xs:simpleContent>
+         <xs:extension base="xs:anyURI">
+            <xs:attribute name="type" type="xs:anyURI" />
+            <xs:attribute name="enabled" type="xs:boolean" default="false" />
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:group name="pdpRWPropertyElements">
+      <xs:annotation>
+         <xs:documentation>Writable (and readable) properties of the domain's
+            policy service: PRP, PDP, etc.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="feature" type="tns:Feature" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Extra implementation-specific feature ID
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="rootPolicyRefExpression" type="xacml:IdReferenceType">
+            <xs:annotation>
+               <xs:documentation>Reference expression (with version pattern(s)) to a policy
+                  to be enforced by the PDP as root policy. This policy and any
+                  other policy referenced (directly or indirectly) from it via XACML
+                  PolicySetIdReference must correspond to a resource under URL path
+                  '/policies'.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:group>
+   <xs:complexType name="PdpPropertiesUpdate">
+      <xs:annotation>
+         <xs:documentation>Writable/updatable PDP properties
+         </xs:documentation>
+      </xs:annotation>
+      <xs:group ref="tns:pdpRWPropertyElements" />
+   </xs:complexType>
+   <xs:element name="pdpPropertiesUpdate" type="tns:PdpPropertiesUpdate">
+      <xs:unique name="updated-feature-id-uniqueness">
+         <xs:selector xpath="feature" />
+         <xs:field xpath="." />
+      </xs:unique>
+   </xs:element>
+   <xs:complexType name="ApplicablePolicies">
+      <xs:annotation>
+         <xs:documentation>
+            Policies actually applicable/in force by a PDP
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="rootPolicyRef" type="xacml:IdReferenceType">
+            <xs:annotation>
+               <xs:documentation>Fixed reference (PolicySetId and constant Version) to the policy
+                  actually enforced by the PDP as root policy, after resolving the rootPolicyRef pattern defined as part of the 'pdpRWPropertyElements' group.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="refPolicyRef" type="xacml:IdReferenceType" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Policy referenced (directly or indirectly) from
+                  the root policy - identified above by 'rootPolicyRef' element - via XACML PolicySetIdReference. In this context,
+                  the Version must be
+                  statically defined, i.e. the actual resolved
+                  version identifier (used by the PDP) must be
+                  specified, no version
+                  pattern may be used.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="PdpProperties">
+      <xs:annotation>
+         <xs:documentation>All (writable and read-only) PDP properties
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:group ref="tns:pdpRWPropertyElements">
+            <xs:annotation>
+               <xs:documentation>In this context, the rootPolicyRef must be
+                  statically defined, i.e. the actual resolved version identifier
+                  (used by the PDP) must be
+                  specified, no Version pattern may be
+                  used.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:group>
+         <xs:element name="applicablePolicies" type="tns:ApplicablePolicies">
+            <xs:annotation>
+               <xs:documentation>Policies applicable by the PDP</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="lastModifiedTime" type="xs:dateTime" use="optional">
+         <xs:annotation>
+            <xs:documentation>Date/time of last modification of the PDP, due to
+               change of policies, attribute providers, etc.
+            </xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:element name="pdpProperties" type="tns:PdpProperties">
+      <xs:unique name="feature-id-uniqueness">
+         <xs:selector xpath="feature" />
+         <xs:field xpath="." />
+      </xs:unique>
+      <xs:unique name="refPolicyRef-uniqueness">
+         <xs:selector xpath="applicablePolicies/refPolicyRef" />
+         <xs:field xpath="." />
+      </xs:unique>
+   </xs:element>
+   <xs:complexType name="PrpProperties">
+      <xs:annotation>
+         <xs:documentation>All (writable and read-only) PRP (Policy
+            Repository) properties
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="maxPolicyCount" type="xs:positiveInteger" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Maximum number of policies. No limit if this
+                  element is missing.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="maxVersionCountPerPolicy" type="xs:positiveInteger" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Maximum number of versions per policy. No limit
+                  if this element is missing.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="versionRollingEnabled" type="xs:boolean" default="false" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>True iff versions are automatically removed to
+                  keep the number of versions under 'maxVersionCountPerPolicy',
+                  especially when this max is already reached. The strategy for
+                  removing versions is implementation-specific; e.g. implementations
+                  may remove the oldest versions first.
+                  Implementations must make
+                  sure it does not
+                  break the 'rootPolicyRef' defined previously or
+                  any Policy
+                  reference from it (direct or indirect).
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="prpProperties" type="tns:PrpProperties" />
+   <xs:complexType name="AttributeProviderList">
+      <xs:sequence>
+         <xs:element name="attributeProvider" type="authz-ext:AbstractAttributeProvider" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="attributeProviders" type="tns:AttributeProviderList" />
+   <xs:simpleType name="VersionId">
+      <xs:annotation>
+         <xs:documentation>Version ID is either a XACML version string or
+            "latest". The latter is a special keyword meaning the latest
+            version.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:union memberTypes="xacml:VersionType">
+         <xs:simpleType>
+            <xs:restriction base="xs:NMTOKEN">
+               <xs:enumeration value="latest" />
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:union>
+   </xs:simpleType>
+   <xs:element name="error">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="message" type="xs:string" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
 </xs:schema>
