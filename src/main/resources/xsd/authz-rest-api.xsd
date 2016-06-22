@@ -20,7 +20,7 @@
 
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:tns="http://authzforce.github.io/rest-api-model/xmlns/authz/5"
-   xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" version="5.2.0">
+   xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.2.0">
    <xs:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" />
    <xs:import namespace="http://www.w3.org/2005/Atom" />
    <xs:import namespace="http://authzforce.github.io/xmlns/pdp/ext/3" />
