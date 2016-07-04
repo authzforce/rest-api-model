@@ -28,6 +28,9 @@
                <wadl:representation mediaType="application/xml" element="atom:link">
                   <wadl:doc>Link to created domain resource</wadl:doc>
                </wadl:representation>
+               <wadl:representation mediaType="application/json" element="atom:link">
+                  <wadl:doc>Link to created domain resource</wadl:doc>
+               </wadl:representation>
             </wadl:response>
             <wadl:response status="400" />
             <wadl:response status="401" />
@@ -44,6 +47,7 @@
             </wadl:request>
             <wadl:response status="200">
                <wadl:representation mediaType="application/xml" element="az:resources" />
+               <wadl:representation mediaType="application/json" element="az:resources" />
             </wadl:response>
             <wadl:response status="401" />
             <wadl:response status="403" />
@@ -58,6 +62,7 @@
                <wadl:request />
                <wadl:response status="200">
                   <wadl:representation mediaType="application/xml" element="az:domain" />
+                  <wadl:representation mediaType="application/json" element="az:domain" />
                </wadl:response>
                <wadl:response status="401" />
                <wadl:response status="403" />
@@ -67,6 +72,9 @@
                <wadl:request />
                <wadl:response status="200">
                   <wadl:representation mediaType="application/xml" element="az:domainProperties">
+                     <wadl:doc>Deleted policy domain properties</wadl:doc>
+                  </wadl:representation>
+                  <wadl:representation mediaType="application/json" element="az:domainProperties">
                      <wadl:doc>Deleted policy domain properties</wadl:doc>
                   </wadl:representation>
                </wadl:response>
@@ -80,6 +88,9 @@
                   <wadl:response status="200">
                      <wadl:representation mediaType="application/xml" element="az:domainProperties" />
                   </wadl:response>
+                  <wadl:response status="200">
+                     <wadl:representation mediaType="application/json" element="az:domainProperties" />
+                  </wadl:response>
                   <wadl:response status="401" />
                   <wadl:response status="403" />
                   <wadl:response status="404" />
@@ -91,6 +102,9 @@
                   </wadl:request>
                   <wadl:response status="200">
                      <wadl:representation mediaType="application/xml" element="az:domainProperties" />
+                  </wadl:response>
+                  <wadl:response status="200">
+                     <wadl:representation mediaType="application/json" element="az:domainProperties" />
                   </wadl:response>
                   <wadl:response status="400" />
                   <wadl:response status="401" />
@@ -104,6 +118,9 @@
                   <wadl:request />
                   <wadl:response status="200">
                      <wadl:representation mediaType="application/xml" element="az:resourceContent" />
+                  </wadl:response>
+                  <wadl:response status="200">
+                     <wadl:representation mediaType="application/json" element="az:resourceContent" />
                   </wadl:response>
                   <wadl:response status="401" />
                   <wadl:response status="404" />
@@ -119,6 +136,9 @@
                      <wadl:response status="200">
                         <wadl:representation mediaType="application/xml" element="az:pdpProperties" />
                      </wadl:response>
+                     <wadl:response status="200">
+                        <wadl:representation mediaType="application/json" element="az:pdpProperties" />
+                     </wadl:response>
                      <wadl:response status="400" />
                      <wadl:response status="401" />
                      <wadl:response status="403" />
@@ -131,6 +151,9 @@
                      <wadl:request />
                      <wadl:response status="200">
                         <wadl:representation mediaType="application/xml" element="az:pdpProperties" />
+                     </wadl:response>
+                     <wadl:response status="200">
+                        <wadl:representation mediaType="application/json" element="az:pdpProperties" />
                      </wadl:response>
                      <wadl:response status="401" />
                      <wadl:response status="403" />
@@ -147,6 +170,9 @@
                      <wadl:response status="200">
                         <wadl:representation mediaType="application/xml" element="az:prpProperties" />
                      </wadl:response>
+                     <wadl:response status="200">
+                        <wadl:representation mediaType="application/json" element="az:prpProperties" />
+                     </wadl:response>
                      <wadl:response status="400" />
                      <wadl:response status="401" />
                      <wadl:response status="403" />
@@ -157,6 +183,9 @@
                      <wadl:request />
                      <wadl:response status="200">
                         <wadl:representation mediaType="application/xml" element="az:prpProperties" />
+                     </wadl:response>
+                     <wadl:response status="200">
+                        <wadl:representation mediaType="application/json" element="az:prpProperties" />
                      </wadl:response>
                      <wadl:response status="401" />
                      <wadl:response status="403" />
@@ -175,6 +204,11 @@
                            <wadl:doc>Link to created managed Policy resource</wadl:doc>
                         </wadl:representation>
                      </wadl:response>
+                     <wadl:response status="200">
+                        <wadl:representation mediaType="application/json" element="atom:link">
+                           <wadl:doc>Link to created managed Policy resource</wadl:doc>
+                        </wadl:representation>
+                     </wadl:response>
                      <wadl:response status="400" />
                      <wadl:response status="401" />
                      <wadl:response status="403" />
@@ -188,6 +222,9 @@
                      <wadl:request />
                      <wadl:response status="200">
                         <wadl:representation mediaType="application/xml" element="az:resources" />
+                     </wadl:response>
+                     <wadl:response status="200">
+                        <wadl:representation mediaType="application/json" element="az:resources" />
                      </wadl:response>
                      <wadl:response status="401" />
                      <wadl:response status="403" />
@@ -204,6 +241,9 @@
                         <wadl:response status="200">
                            <wadl:representation mediaType="application/xml" element="az:resources" />
                         </wadl:response>
+                        <wadl:response status="200">
+                           <wadl:representation mediaType="application/json" element="az:resources" />
+                        </wadl:response>
                         <wadl:response status="401" />
                         <wadl:response status="403" />
                         <wadl:response status="404" />
@@ -213,6 +253,11 @@
                         <wadl:request />
                         <wadl:response status="200">
                            <wadl:representation mediaType="application/xml" element="az:resources">
+                              <wadl:doc>Deleted policy versions</wadl:doc>
+                           </wadl:representation>
+                        </wadl:response>
+                        <wadl:response status="200">
+                           <wadl:representation mediaType="application/json" element="az:resources">
                               <wadl:doc>Deleted policy versions</wadl:doc>
                            </wadl:representation>
                         </wadl:response>
@@ -231,6 +276,9 @@
                            <wadl:response status="200">
                               <wadl:representation mediaType="application/xml" element="xacml:PolicySet" />
                            </wadl:response>
+                           <wadl:response status="200">
+                              <wadl:representation mediaType="application/json" element="xacml:PolicySet" />
+                           </wadl:response>
                            <wadl:response status="401" />
                            <wadl:response status="403" />
                            <wadl:response status="404" />
@@ -240,6 +288,11 @@
                            <wadl:request />
                            <wadl:response status="200">
                               <wadl:representation mediaType="application/xml" element="xacml:PolicySet">
+                                 <wadl:doc>Deleted policy version</wadl:doc>
+                              </wadl:representation>
+                           </wadl:response>
+                           <wadl:response status="200">
+                              <wadl:representation mediaType="application/json" element="xacml:PolicySet">
                                  <wadl:doc>Deleted policy version</wadl:doc>
                               </wadl:representation>
                            </wadl:response>
@@ -260,6 +313,9 @@
                      <wadl:response status="200">
                         <wadl:representation mediaType="application/xml" element="az:attributeProviders" />
                      </wadl:response>
+                     <wadl:response status="200">
+                        <wadl:representation mediaType="application/json" element="az:attributeProviders" />
+                     </wadl:response>
                      <wadl:response status="401" />
                      <wadl:response status="403" />
                      <wadl:response status="404" />
@@ -270,6 +326,9 @@
                      </wadl:request>
                      <wadl:response status="200">
                         <wadl:representation mediaType="application/xml" element="az:attributeProviders" />
+                     </wadl:response>
+                     <wadl:response status="200">
+                        <wadl:representation mediaType="application/json" element="az:attributeProviders" />
                      </wadl:response>
                      <wadl:response status="400" />
                      <wadl:response status="401" />
@@ -286,6 +345,9 @@
                   </wadl:request>
                   <wadl:response status="200">
                      <wadl:representation mediaType="application/xml" element="xacml:Response" />
+                  </wadl:response>
+                  <wadl:response status="200">
+                     <wadl:representation mediaType="application/json" element="xacml:Response" />
                   </wadl:response>
                   <wadl:response status="400" />
                   <wadl:response status="401" />

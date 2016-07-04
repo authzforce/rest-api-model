@@ -1,6 +1,11 @@
 # Change log
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
+## 5.3.0
+### Added
+- Json support to the WADL
+
+
 ## 5.2.0
 ### Added
 - Github #1: Enhanced management of PDP features: all supported features may be listed, and each feature may have a 'type' (e.g. XACML function, datatype...) and an 'enabled' (true or false) state that can be updated via the API
