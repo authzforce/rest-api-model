@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>authzforce-ce-parent</artifactId>
@@ -7,7 +6,7 @@
 		<version>3.3.7</version>
 	</parent>
 	<artifactId>authzforce-ce-rest-api-model</artifactId>
-	<version>5.3.1-SNAPSHOT</version>
+	<version>5.3.2-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>AuthzForce CE - Generic REST API model for Authorization PDPs</description>
 	<url>https://github.com/authzforce/rest-api-model</url>
@@ -129,8 +128,7 @@
 									</includes>
 									<outputDir>${project.build.outputDirectory}</outputDir>
 									<fileMappers>
-										<fileMapper
-											implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
 											<targetExtension>json.wadl</targetExtension>
 										</fileMapper>
 									</fileMappers>
@@ -154,8 +152,7 @@
 									</includes>									
 									<outputDir>${project.build.outputDirectory}</outputDir>
 									<fileMappers>
-										<fileMapper
-											implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
 											<targetExtension>fastinfoset.wadl</targetExtension>
 										</fileMapper>
 									</fileMappers>
