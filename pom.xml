@@ -133,7 +133,7 @@
                            <targetExtension>fastinfoset.wadl</targetExtension>
                         </fileMapper>
                      </fileMappers>
-                     <stylesheet>add-fastinfoset-to-wadl.xsl</stylesheet>
+                     <stylesheet>add-fastinfoset-and-json-to-wadl.xsl</stylesheet>
                   </transformationSet>
                </transformationSets>
             </configuration>

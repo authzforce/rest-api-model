@@ -10,6 +10,9 @@
         <wadl:representation mediaType="application/fastinfoset">
             <xsl:attribute name="element"><xsl:value-of select="$xmlElement" /></xsl:attribute>
         </wadl:representation>
+        <wadl:representation mediaType="application/json">
+            <xsl:attribute name="element"><xsl:value-of select="$xmlElement" /></xsl:attribute>
+        </wadl:representation>
     </xsl:template>
     <!-- standard copy template -->
     <xsl:template match="@*|node()">
