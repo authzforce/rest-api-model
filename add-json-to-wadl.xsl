@@ -6,10 +6,7 @@
         <xsl:variable name="xmlElement" select="@element" />
         <xsl:copy>
             <xsl:apply-templates select="@*|node()" />
-        </xsl:copy>
-        <wadl:representation mediaType="application/fastinfoset">
-            <xsl:attribute name="element"><xsl:value-of select="$xmlElement" /></xsl:attribute>
-        </wadl:representation>
+        </xsl:copy>     
         <wadl:representation mediaType="application/json">
             <xsl:attribute name="element"><xsl:value-of select="$xmlElement" /></xsl:attribute>
         </wadl:representation>
