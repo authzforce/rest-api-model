@@ -1,4 +1,4 @@
-This package includes a sample client code that shows how to to send a XACML request to the AuthzForce PDP API. This code is in the test class `org.ow2.authzforce.jaxrs.api.test` in `src/test/java`. 
+This package includes a sample client code that shows how to to send a XACML request to the AuthzForce PDP API. This code is in the test class `org.ow2.authzforce.rest.api.test` in `src/test/java`. 
 
 If you are accessing an Authorization PDP implementation such as AuthzForce Server over SSL (HTTPS), configure the keystore (resp. truststore) location and password in configuration element `keyManagers` (resp. `trustManagers`) in file `src/test/resources/cxfClient.xml`. The keystore is the one that contains your own private key and the certificate that you use to authenticate to the server. The truststore is in `src/test/resources`, you may have to change to an absolute path for the truststore location, depending on where you execute the code from.
 

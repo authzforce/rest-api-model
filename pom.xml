@@ -61,23 +61,6 @@
 		<!-- /Test dependencies -->
 	</dependencies>
 	<build>
-		<resources>
-			<!-- Replace variable 'version' in WADL file -->
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>authz-api.wadl</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>false</filtering>
-				<excludes>
-					<exclude>authz-api.wadl</exclude>
-				</excludes>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>com.mycila</groupId>
@@ -87,9 +70,6 @@
 					<includes>
 						<include>src/**</include>
 					</includes>
-					<excludes>
-						<exclude>src/main/resources/wadl.xsl</exclude>
-					</excludes>
 				</configuration>
 				<executions>
 					<execution>
@@ -109,36 +89,35 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<!-- We cannot use the resources:resource element here because it is assigned to process-resources phase wich comes after generate-sources therefore after xml-maven-plugin call below, therefore too late; so we use maven-resources-plugin instead to move execution to earlier phase -->
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<id>copy-wadl+xsd-for-version-replacement+cxf-wadl2java</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>xml-maven-plugin</artifactId>
 				<version>1.0.1</version>
 				<executions>
 					<execution>
-						<id>generate-default</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>transform</goal>
-						</goals>
-						<configuration>
-							<transformationSets>
-								<transformationSet>
-									<dir>src/main/resources</dir>
-									<includes>
-										<include>authz-api.wadl</include>
-									</includes>
-									<outputDir>${project.build.outputDirectory}</outputDir>
-									<fileMappers>
-										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
-											<targetExtension>json.wadl</targetExtension>
-										</fileMapper>
-									</fileMappers>
-									<stylesheet>add-json-to-wadl.xsl</stylesheet>
-								</transformationSet>
-							</transformationSets>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-fastinfoset</id>
+						<id>generate-wadl-with-fastinfoset</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>transform</goal>
@@ -148,12 +127,60 @@
 								<transformationSet>
 									<dir>${project.build.outputDirectory}</dir>
 									<includes>
-										<include>authz-api.json.wadl</include>
+										<include>authz-api.wadl</include>
 									</includes>									
 									<outputDir>${project.build.outputDirectory}</outputDir>
 									<fileMappers>
-										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
-											<targetExtension>fastinfoset.wadl</targetExtension>
+										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
+											<targetName>authz-api+fi.wadl</targetName>
+										</fileMapper>
+									</fileMappers>
+									<stylesheet>add-fastinfoset-to-wadl.xsl</stylesheet>
+								</transformationSet>
+							</transformationSets>
+						</configuration>
+					</execution>
+					<execution>
+						<id>generate-wadl-with-json</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>transform</goal>
+						</goals>
+						<configuration>
+							<transformationSets>
+								<transformationSet>
+									<dir>${project.build.outputDirectory}</dir>
+									<includes>
+										<include>authz-api.wadl</include>
+									</includes>
+									<outputDir>${project.build.outputDirectory}</outputDir>
+									<fileMappers>
+										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
+											<targetName>authz-api+json.wadl</targetName>
+										</fileMapper>
+									</fileMappers>
+									<stylesheet>add-json-to-wadl.xsl</stylesheet>
+								</transformationSet>
+							</transformationSets>
+						</configuration>
+					</execution>
+					<execution>
+						<id>generate-wadl-with-fastinfoset-and-json</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>transform</goal>
+						</goals>
+						<configuration>
+							<transformationSets>
+								<transformationSet>
+									<dir>${project.build.outputDirectory}</dir>
+									<includes>
+										<include>authz-api+json.wadl</include>
+									</includes>									
+									<outputDir>${project.build.outputDirectory}</outputDir>
+									<fileMappers>
+										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
+											<targetName>authz-api+fi+json.wadl</targetName>
 										</fileMapper>
 									</fileMappers>
 									<stylesheet>add-fastinfoset-to-wadl.xsl</stylesheet>
@@ -214,28 +241,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
-				<executions>
-					<execution>
-						<id>copy-xsd-for-cxf-wadl2java</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.outputDirectory}/xsd</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/resources/xsd</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-wadl2java-plugin</artifactId>
 				<!-- Note: xjc extra args for this plugin should be supported since 2.7.4: 
@@ -248,7 +253,7 @@
 						<configuration>
 							<wadlOptions>
 								<wadlOption>
-									<wadl>${project.build.outputDirectory}/authz-api.json.fastinfoset.wadl</wadl>
+									<wadl>${project.build.outputDirectory}/authz-api+fi+json.wadl</wadl>
 									<packagename>org.ow2.authzforce.rest.api.jaxrs</packagename>
 									<extraargs>
 										<extraarg>-catalog</extraarg>
