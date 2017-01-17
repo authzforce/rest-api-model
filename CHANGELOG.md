@@ -2,7 +2,7 @@
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
 
-## Unreleased
+## 5.4.0
 ### Changed
 * Maven parent project version: 3.3.7 -> 4.1.1
 	* **Java version: 1.7 -> 1.8**
