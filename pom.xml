@@ -142,7 +142,7 @@
                   </configuration>
                </execution>
                <execution>
-                  <id>generate-wadl-with-json</id>
+                  <id>generate-wadl-with-mapped-json</id>
                   <phase>generate-sources</phase>
                   <goals>
                      <goal>transform</goal>
@@ -166,7 +166,7 @@
                   </configuration>
                </execution>
                <execution>
-                  <id>generate-wadl-with-fastinfoset-and-json</id>
+                  <id>generate-wadl-with-mapped-json-and-json-profile-of-xacml</id>
                   <phase>generate-sources</phase>
                   <goals>
                      <goal>transform</goal>
@@ -176,12 +176,42 @@
                         <transformationSet>
                            <dir>${project.build.outputDirectory}</dir>
                            <includes>
-                              <include>authz-api+json.wadl</include>
+                              <include>authz-api.wadl</include>
                            </includes>
                            <outputDir>${project.build.outputDirectory}</outputDir>
                            <fileMappers>
                               <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
-                                 <targetName>authz-api+fi+json.wadl</targetName>
+                                 <targetName>authz-api+xacml+json.wadl</targetName>
+                              </fileMapper>
+                           </fileMappers>
+                           <stylesheet>add-json-to-wadl.xsl</stylesheet>
+                           <parameters>
+                              <parameter>
+                                 <name>enable_xacml_json_profile</name>
+                                 <value>true</value>
+                              </parameter>
+                           </parameters>
+                        </transformationSet>
+                     </transformationSets>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>generate-wadl-with-all</id>
+                  <phase>generate-sources</phase>
+                  <goals>
+                     <goal>transform</goal>
+                  </goals>
+                  <configuration>
+                     <transformationSets>
+                        <transformationSet>
+                           <dir>${project.build.outputDirectory}</dir>
+                           <includes>
+                              <include>authz-api+xacml+json.wadl</include>
+                           </includes>
+                           <outputDir>${project.build.outputDirectory}</outputDir>
+                           <fileMappers>
+                              <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
+                                 <targetName>authz-api+all.wadl</targetName>
                               </fileMapper>
                            </fileMappers>
                            <stylesheet>add-fastinfoset-to-wadl.xsl</stylesheet>
@@ -253,7 +283,7 @@
                   <configuration>
                      <wadlOptions>
                         <wadlOption>
-                           <wadl>${project.build.outputDirectory}/authz-api+fi+json.wadl</wadl>
+                           <wadl>${project.build.outputDirectory}/authz-api+all.wadl</wadl>
                            <packagename>org.ow2.authzforce.rest.api.jaxrs</packagename>
                            <extraargs>
                               <extraarg>-catalog</extraarg>
