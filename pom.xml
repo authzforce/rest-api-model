@@ -1,12 +1,31 @@
+<!--
+
+    Copyright 2012-2017 Thales Services SAS.
+
+    This file is part of AuthzForce CE.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <modelVersion>4.0.0</modelVersion>
    <parent>
       <artifactId>authzforce-ce-parent</artifactId>
       <groupId>org.ow2.authzforce</groupId>
-      <version>4.1.1</version>
+      <version>6.0.1</version>
    </parent>
    <artifactId>authzforce-ce-rest-api-model</artifactId>
-   <version>5.4.0</version>
+   <version>5.5.0</version>
    <name>${project.groupId}:${project.artifactId}</name>
    <description>AuthzForce CE - Generic REST API model for Authorization PDPs</description>
    <url>https://github.com/authzforce/rest-api-model</url>
@@ -65,12 +84,6 @@
          <plugin>
             <groupId>com.mycila</groupId>
             <artifactId>license-maven-plugin</artifactId>
-            <configuration>
-               <header>license/thales-gpl.header.txt</header>
-               <includes>
-                  <include>src/**</include>
-               </includes>
-            </configuration>
             <executions>
                <execution>
                   <id>format-sources-license</id>
@@ -142,7 +155,7 @@
                   </configuration>
                </execution>
                <execution>
-                  <id>generate-wadl-with-json</id>
+                  <id>generate-wadl-with-mapped-json</id>
                   <phase>generate-sources</phase>
                   <goals>
                      <goal>transform</goal>
@@ -166,7 +179,7 @@
                   </configuration>
                </execution>
                <execution>
-                  <id>generate-wadl-with-fastinfoset-and-json</id>
+                  <id>generate-wadl-with-mapped-json-and-json-profile-of-xacml</id>
                   <phase>generate-sources</phase>
                   <goals>
                      <goal>transform</goal>
@@ -176,12 +189,42 @@
                         <transformationSet>
                            <dir>${project.build.outputDirectory}</dir>
                            <includes>
-                              <include>authz-api+json.wadl</include>
+                              <include>authz-api.wadl</include>
                            </includes>
                            <outputDir>${project.build.outputDirectory}</outputDir>
                            <fileMappers>
                               <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
-                                 <targetName>authz-api+fi+json.wadl</targetName>
+                                 <targetName>authz-api+xacml+json.wadl</targetName>
+                              </fileMapper>
+                           </fileMappers>
+                           <stylesheet>add-json-to-wadl.xsl</stylesheet>
+                           <parameters>
+                              <parameter>
+                                 <name>enable_xacml_json_profile</name>
+                                 <value>true</value>
+                              </parameter>
+                           </parameters>
+                        </transformationSet>
+                     </transformationSets>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>generate-wadl-with-all</id>
+                  <phase>generate-sources</phase>
+                  <goals>
+                     <goal>transform</goal>
+                  </goals>
+                  <configuration>
+                     <transformationSets>
+                        <transformationSet>
+                           <dir>${project.build.outputDirectory}</dir>
+                           <includes>
+                              <include>authz-api+xacml+json.wadl</include>
+                           </includes>
+                           <outputDir>${project.build.outputDirectory}</outputDir>
+                           <fileMappers>
+                              <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
+                                 <targetName>authz-api+all.wadl</targetName>
                               </fileMapper>
                            </fileMappers>
                            <stylesheet>add-fastinfoset-to-wadl.xsl</stylesheet>
@@ -253,7 +296,7 @@
                   <configuration>
                      <wadlOptions>
                         <wadlOption>
-                           <wadl>${project.build.outputDirectory}/authz-api+fi+json.wadl</wadl>
+                           <wadl>${project.build.outputDirectory}/authz-api+all.wadl</wadl>
                            <packagename>org.ow2.authzforce.rest.api.jaxrs</packagename>
                            <extraargs>
                               <extraarg>-catalog</extraarg>
