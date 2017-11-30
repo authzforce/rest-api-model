@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright 2012-2017 Thales Services SAS.
-
-    This file is part of AuthzForce CE.
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
--->
+<!-- Copyright 2012-2017 Thales Services SAS. This file is part of AuthzForce CE. Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the 
+   License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
+   on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. -->
+<!-- Copyright 2012-2017 Thales Services SAS. This file is part of AuthzForce CE. Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the 
+   License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
+   on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:tns="http://authzforce.github.io/rest-api-model/xmlns/authz/5"
-   xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.2.0">
+   xmlns:authz-ext="http://authzforce.github.io/xmlns/pdp/ext/3" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xacml="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" elementFormDefault="qualified"
+   attributeFormDefault="unqualified" version="5.3.0">
    <xs:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" />
    <xs:import namespace="http://www.w3.org/2005/Atom" />
    <xs:import namespace="http://authzforce.github.io/xmlns/pdp/ext/3" />
@@ -34,18 +22,21 @@
                Same function as in SCIM
                schema:
                An identifier for the Resource as defined by the Service
-               Consumer. The externalId may simplify identification of the
+               Consumer. The externalId may simplify identification of
+               the
                Resource between Service Consumer and Service
                provider by allowing
                the Consumer
                to refer to the Resource with its own identifier,
-               obviating the need to store a local mapping between the local
+               obviating the need to store a local mapping between the
+               local
                identifier of the Resource and the identifier
                used by the Service
                Provider. Each
                Resource MAY include a non-empty
                externalId value. The
-               value of the externalId attribute is always issued be the
+               value of the externalId attribute is always
+               issued be the
                Service
                Consumer and can never be specified by
                the Service Provider. The
@@ -135,7 +126,8 @@
             <xs:annotation>
                <xs:documentation>Reference expression (with version pattern(s)) to a policy
                   to be enforced by the PDP as root policy. This policy and any
-                  other policy referenced (directly or indirectly) from it via XACML
+                  other policy referenced (directly or indirectly)
+                  from it via XACML
                   PolicySetIdReference must correspond to a resource under URL path
                   '/policies'.
                </xs:documentation>
@@ -166,7 +158,8 @@
          <xs:element name="rootPolicyRef" type="xacml:IdReferenceType">
             <xs:annotation>
                <xs:documentation>Fixed reference (PolicySetId and constant Version) to the policy
-                  actually enforced by the PDP as root policy, after resolving the rootPolicyRef pattern defined as part of the 'pdpRWPropertyElements' group.
+                  actually enforced by the PDP as root policy, after resolving the rootPolicyRef pattern defined as part
+                  of the 'pdpRWPropertyElements' group.
                </xs:documentation>
             </xs:annotation>
          </xs:element>
@@ -174,7 +167,8 @@
             <xs:annotation>
                <xs:documentation>Policy referenced (directly or indirectly) from
                   the root policy - identified above by 'rootPolicyRef' element - via XACML PolicySetIdReference. In this context,
-                  the Version must be
+                  the
+                  Version must be
                   statically defined, i.e. the actual resolved
                   version identifier (used by the PDP) must be
                   specified, no version
@@ -249,12 +243,14 @@
             <xs:annotation>
                <xs:documentation>True iff versions are automatically removed to
                   keep the number of versions under 'maxVersionCountPerPolicy',
-                  especially when this max is already reached. The strategy for
+                  especially when this max is already reached. The strategy
+                  for
                   removing versions is implementation-specific; e.g. implementations
                   may remove the oldest versions first.
                   Implementations must make
                   sure it does not
-                  break the 'rootPolicyRef' defined previously or
+                  break the 'rootPolicyRef' defined
+                  previously or
                   any Policy
                   reference from it (direct or indirect).
                </xs:documentation>
@@ -284,11 +280,42 @@
          </xs:simpleType>
       </xs:union>
    </xs:simpleType>
-   <xs:element name="error">
-      <xs:complexType>
-         <xs:sequence>
-            <xs:element name="message" type="xs:string" />
-         </xs:sequence>
-      </xs:complexType>
+   <xs:complexType name="ProductMetadata">
+      <xs:annotation>
+         <xs:documentation>Product metadata
+         </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="name" type="xs:token" use="required">
+         <xs:annotation>
+            <xs:documentation>product name</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="version" type="tns:VersionId" use="required">
+         <xs:annotation>
+            <xs:documentation>product version</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="release_date" type="xs:date" use="required">
+         <xs:annotation>
+            <xs:documentation>product release date</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="uptime" type="xs:duration" use="required">
+         <xs:annotation>
+            <xs:documentation>uptime</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="doc" type="xs:anyURI" use="required">
+         <xs:annotation>
+            <xs:documentation>link to REST API documentation</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:element name="productMetadata" type="tns:ProductMetadata" />
+   <xs:element name="JSONObject">
+      <xs:annotation>
+         <xs:documentation>Mock XML type representing a JSON object, for use as representation type in the WADL</xs:documentation>
+      </xs:annotation>
+      <xs:complexType />
    </xs:element>
 </xs:schema>
