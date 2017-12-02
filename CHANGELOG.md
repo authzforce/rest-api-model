@@ -2,7 +2,7 @@
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
 
-## Unreleased
+## 5.6.0
 ### Changed
 - Parent project `authzforce-ce-parent` version: 6.0.1 -> 7.0.0
 - API schema `authz-rest-api.xsd` (5.2.0 -> 5.3.0): new ProductMetadata type used for new "/version" resource providing product metadata.
