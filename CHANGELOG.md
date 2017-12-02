@@ -2,6 +2,18 @@
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
 
+## 5.6.0
+### Changed
+- Parent project `authzforce-ce-parent` version: 6.0.1 -> 7.0.0
+- API schema `authz-rest-api.xsd` (5.2.0 -> 5.3.0): new ProductMetadata type used for new "/version" resource providing product metadata.
+
+### Added
+- Resource "/version" allowing GET method to get product metadata, as described in https://jira.ow2.org/browse/AUTHZFORCE-30 (product name,
+version, release_date, uptime, REST API doc URL)
+- Supported accept/content-type = `application/xacml+xml` - defined by [RFC 7061](https://tools.ietf.org/html/rfc7061) - on `/domains/{id}/pap/policies` for XACML PolicySet payload, and on `/domains/{id}/pdp` for XACML Request/Response payload
+- Support for [JSON Profile of XACML](http://docs.oasis-open.org/xacml/xacml-json-http/v1.0/xacml-json-http-v1.0.html)'s media type on `/domains/{id}/pdp`: accept/content-type = `application/xacml+json`
+
+
 ## 5.5.0
 ### Changed
 - Maven project parent (authzforce-ce-parent) version: 6.0.1
