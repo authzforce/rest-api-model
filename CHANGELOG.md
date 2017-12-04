@@ -2,6 +2,12 @@
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
 
+## 5.7.0
+### Changed
+- Parent project `authzforce-ce-parent` version: 7.0.0 -> 7.1.0
+	- Dependency version: json: 20170516 -> 20171018
+
+
 ## 5.6.0
 ### Changed
 - Parent project `authzforce-ce-parent` version: 6.0.1 -> 7.0.0
