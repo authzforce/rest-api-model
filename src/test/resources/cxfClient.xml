@@ -31,17 +31,23 @@
       http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<util:list id="apiSchemaLocations">
-		<value>classpath:/xsd/authz-api.xsd</value>
+		<value>classpath:/xsd/authz-rest-api.xsd</value>
 	</util:list>
 
 	<bean id="apiSchemaHandler" class="org.apache.cxf.jaxrs.utils.schemas.SchemaHandler">
-		<property name="catalogLocation" value="classpath:META-INF/jax-rs-catalog.xml" />
+		<property name="catalogLocation" value="classpath:catalog.xml" />
 		<property name="schemaLocations" ref="apiSchemaLocations" />
 	</bean>
 
 	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
 		<property name="singleJaxbContext" value="true" />
-		<!-- <property name="extraClass" ref="extensionJaxbClassArray" /> -->
+		<!-- See CXF doc: https://cxf.apache.org/docs/jax-rs-data-bindings.html#JAX-RSDataBindings-SingleJAXBContextandextrauserclasses -->
+		<property name="extraClass">
+			 <list>
+			 <!-- Example of extra class -->
+           <value>org.ow2.authzforce.rest.api.test.ContentTest</value>
+         </list>
+		</property>
 		<property name="schemaHandler" ref="apiSchemaHandler" />
 	</bean>
 	
