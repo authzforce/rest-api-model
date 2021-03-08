@@ -2,6 +2,15 @@
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
 
+## 6.0.0
+### Changed
+- Parent project `authzforce-ce-parent` version: 8.0.0 
+  - Upgraded generated code to Java 11. Java 8 no longer supported.
+  - Upgraded managed dependencies:	
+    - Jakarta RESTful Web Services: v2.1.6
+    - org.json:json: v20190722	
+
+	
 ## 5.7.0
 ### Changed
 - Parent project `authzforce-ce-parent` version: 7.0.0 -> 7.1.0
