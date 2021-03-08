@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>authzforce-ce-parent</artifactId>
 		<groupId>org.ow2.authzforce</groupId>
-		<version>7.6.1</version>
+		<version>8.0.0</version>
 	</parent>
 	<artifactId>authzforce-ce-rest-api-model</artifactId>
 	<version>5.7.1-SNAPSHOT</version>
@@ -24,8 +24,8 @@
 	</scm>
 	<dependencies>
 		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
+			<groupId>jakarta.ws.rs</groupId>
+			<artifactId>jakarta.ws.rs-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.ow2.authzforce</groupId>
@@ -78,6 +78,9 @@
 				<artifactId>license-maven-plugin</artifactId>
 				<configuration>
 					<header>license/alv2-header.txt</header>
+					<headerDefinitions>
+						<headerDefinition>license/header-defs.xml</headerDefinition>
+					</headerDefinitions>
 					<includes>
 						<include>src/main/java/**</include>
 						<!-- Include test files also -->
@@ -105,7 +108,7 @@
 				<!-- We cannot use the resources:resource element here because it is assigned to process-resources phase wich comes after generate-sources therefore after xml-maven-plugin call below, therefore too 
 					late; so we use maven-resources-plugin instead to move execution to earlier phase -->
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
+				<version>3.2.0</version>
 				<executions>
 					<execution>
 						<id>copy-wadl+xsd-for-version-replacement+cxf-wadl2java</id>

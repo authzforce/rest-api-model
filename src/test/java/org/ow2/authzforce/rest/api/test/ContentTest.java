@@ -1,5 +1,5 @@
-/**
- * Copyright 2012-2019 Thales Services SAS.
+/*
+ * Copyright 2012-2021 THALES.
  *
  * This file is part of AuthzForce CE.
  *
