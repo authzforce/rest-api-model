@@ -315,6 +315,7 @@
                            <a href="https://tools.ietf.org/html/rfc7061">RFC 7061</a>
                         </wadl:doc>
                      </wadl:representation>
+                     <wadl:representation mediaType="application/geoxacml+xml" />
                   </wadl:request>
                   <wadl:response status="200">
                      <wadl:representation mediaType="application/xml" element="xacml:Response" />
@@ -323,6 +324,7 @@
                            <a href="https://tools.ietf.org/html/rfc7061">RFC 7061</a>
                         </wadl:doc>
                      </wadl:representation>
+                     <wadl:representation mediaType="application/geoxacml+xml" />
                   </wadl:response>
                   <wadl:response status="400" />
                   <wadl:response status="401" />

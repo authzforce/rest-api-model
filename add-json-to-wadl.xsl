@@ -23,6 +23,7 @@
                      <a href="http://docs.oasis-open.org/xacml/xacml-json-http/v1.0/xacml-json-http-v1.0.html">JSON Profile of XACML 3.0</a>
                   </wadl:doc>
                </wadl:representation>
+				<wadl:representation mediaType="application/geoxacml+json" element="az:JSONObject" />
             </wadl:request>
             <wadl:response status="200">
                <wadl:representation mediaType="application/xacml+json" element="az:JSONObject">
@@ -30,6 +31,7 @@
                      <a href="http://docs.oasis-open.org/xacml/xacml-json-http/v1.0/xacml-json-http-v1.0.html">JSON Profile of XACML 3.0</a>
                   </wadl:doc>
                </wadl:representation>
+				<wadl:representation mediaType="application/geoxacml+json" element="az:JSONObject" />
             </wadl:response>
             <wadl:response status="400" />
             <wadl:response status="401" />
