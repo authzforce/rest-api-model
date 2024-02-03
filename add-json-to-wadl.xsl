@@ -23,6 +23,8 @@
                      <a href="http://docs.oasis-open.org/xacml/xacml-json-http/v1.0/xacml-json-http-v1.0.html">JSON Profile of XACML 3.0</a>
                   </wadl:doc>
                </wadl:representation>
+				<!-- If we specify an element again for 'application/json', CXF wadl2java plugin ignores the fact that it is the same and maps to generic java type 'javax.xml.transform.Source' -->
+				<wadl:representation mediaType="application/geoxacml+json" />
             </wadl:request>
             <wadl:response status="200">
                <wadl:representation mediaType="application/xacml+json" element="az:JSONObject">
@@ -30,6 +32,8 @@
                      <a href="http://docs.oasis-open.org/xacml/xacml-json-http/v1.0/xacml-json-http-v1.0.html">JSON Profile of XACML 3.0</a>
                   </wadl:doc>
                </wadl:representation>
+				<!-- If we specify an element again for 'application/json', CXF wadl2java plugin ignores the fact that it is the same and maps to generic java type 'javax.xml.transform.Source' -->
+				<wadl:representation mediaType="application/geoxacml+json" />
             </wadl:response>
             <wadl:response status="400" />
             <wadl:response status="401" />

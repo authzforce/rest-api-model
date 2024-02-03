@@ -3,10 +3,10 @@
 	<parent>
 		<artifactId>authzforce-ce-parent</artifactId>
 		<groupId>org.ow2.authzforce</groupId>
-		<version>8.0.0</version>
+		<version>9.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>authzforce-ce-rest-api-model</artifactId>
-	<version>6.0.1-SNAPSHOT</version>
+	<version>6.0.0</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>AuthzForce CE - Generic REST API model for Authorization PDPs</description>
 	<url>https://github.com/authzforce/rest-api-model</url>
@@ -243,8 +243,8 @@
 				</dependencies>
 			</plugin>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
+				<groupId>org.jvnet.jaxb</groupId>
+				<artifactId>jaxb-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<goals>
@@ -253,23 +253,32 @@
 					</execution>
 				</executions>
 				<configuration>
+					<specVersion>4.0.2</specVersion>
+					<verbose>false</verbose>
 					<extension>true</extension>
+					<strict>false</strict>
+					<removeOldOutput>true</removeOldOutput>
 					<useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
 					<args>
+						<!--
 						<arg>-Xvalue-constructor</arg>
-						<arg>-Ximmutable</arg>
-						<arg>-constructorAccess=default</arg>
+						-->
+						<arg>-Ximm</arg>
+						<arg>-Ximm-nofinalclasses</arg>
 					</args>
 					<plugins>
+						<!-- https://github.com/highsource/jaxb-tools/wiki/Using-JAXB2-Basics-Plugins#using-jaxb-plugins-with-maven -->
+						<!-- https://github.com/highsource/jaxb-tools/wiki/JAXB-Tools-Migration-Guide#migration-from-v2-to-v3 -->
+						<!-- Plugin required for -XtoString, -XsimpleEquals -->
 						<plugin>
-							<groupId>org.jvnet.jaxb2_commons</groupId>
-							<artifactId>jaxb2-value-constructor</artifactId>
-							<version>${jaxb2-value-constructor.version}</version>
+							<groupId>org.jvnet.jaxb</groupId>
+							<artifactId>jaxb-plugins</artifactId>
+							<version>${jaxb-plugins.version}</version>
 						</plugin>
 						<plugin>
-							<groupId>net.codesup.util</groupId>
-							<artifactId>jaxb2-rich-contract-plugin</artifactId>
-							<version>1.15.0</version>
+							<groupId>com.github.sabomichal</groupId>
+							<artifactId>immutable-xjc-plugin</artifactId>
+							<version>${immutable-xjc-plugins.version}</version>
 						</plugin>
 					</plugins>
 					<bindingDirectory>src/main/jaxb</bindingDirectory>
