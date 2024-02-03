@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2021 THALES.
+ * Copyright 2012-2024 THALES.
  *
  * This file is part of AuthzForce CE.
  *
@@ -19,16 +19,15 @@ package org.ow2.authzforce.rest.api.test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.util.JAXBSource;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.util.JAXBSource;
 import javax.xml.namespace.QName;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -120,7 +119,7 @@ public class AzClient
 		/*
 		 * Create the REST (JAX-RS) client
 		 */
-		final JAXBElementProvider jaxbProvider = new JAXBElementProvider();
+		final JAXBElementProvider<?> jaxbProvider = new JAXBElementProvider<>();
 		jaxbProvider.setSingleJaxbContext(true);
 		/*
 		 * Extra XML CSontent to be sent in XACML Request (ContentTest element)

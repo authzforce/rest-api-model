@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-	jaxb:extensionBindingPrefixes="xjc" jaxb:version="2.1">
-	<jaxb:globalBindings generateMixedExtensions="true"
-		fixedAttributeAsConstantProperty="true">
+<!-- JAXB version must be 3.0 for jaxb-maven-plugin 4.x -->
+<jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:extensionBindingPrefixes="xjc" jaxb:version="3.0" >
+	<!-- If you want to generate interfaces for all schema-derived classes, switch generateValueClass to 'false'. -->
+	<jaxb:globalBindings generateMixedExtensions="true" fixedAttributeAsConstantProperty="true" generateValueClass="true">
 		<xjc:simple />
+		<jaxb:serializable uid="1"/>
 	</jaxb:globalBindings>
 </jaxb:bindings>
