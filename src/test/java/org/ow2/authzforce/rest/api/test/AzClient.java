@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2021 THALES.
+ * Copyright 2012-2024 THALES.
  *
  * This file is part of AuthzForce CE.
  *
@@ -19,16 +19,11 @@ package org.ow2.authzforce.rest.api.test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.util.JAXBSource;
 import javax.xml.namespace.QName;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -36,19 +31,10 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.apache.cxf.Bus;
-import org.apache.cxf.BusFactory;
-import org.apache.cxf.bus.spring.SpringBusFactory;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.apache.cxf.jaxrs.client.ClientConfiguration;
-import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
-import org.apache.cxf.jaxrs.client.WebClient;
-import org.apache.cxf.jaxrs.provider.JAXBElementProvider;
-import org.ow2.authzforce.rest.api.jaxrs.DomainResource;
-import org.ow2.authzforce.rest.api.jaxrs.DomainsResource;
-import org.xml.sax.SAXException;
-
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.util.JAXBSource;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Attribute;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.AttributeValueType;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Attributes;
@@ -56,6 +42,15 @@ import oasis.names.tc.xacml._3_0.core.schema.wd_17.Content;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Request;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Response;
 import oasis.names.tc.xacml._3_0.core.schema.wd_17.Result;
+import org.apache.cxf.Bus;
+import org.apache.cxf.BusFactory;
+import org.apache.cxf.bus.spring.SpringBusFactory;
+import org.apache.cxf.ext.logging.LoggingFeature;
+import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
+import org.apache.cxf.jaxrs.provider.JAXBElementProvider;
+import org.ow2.authzforce.rest.api.jaxrs.DomainResource;
+import org.ow2.authzforce.rest.api.jaxrs.DomainsResource;
+import org.xml.sax.SAXException;
 
 /**
  * Sample client code to request the Authorization PDP
@@ -120,20 +115,14 @@ public class AzClient
 		/*
 		 * Create the REST (JAX-RS) client
 		 */
-		final JAXBElementProvider jaxbProvider = new JAXBElementProvider();
+		final JAXBElementProvider<?> jaxbProvider = new JAXBElementProvider<>();
 		jaxbProvider.setSingleJaxbContext(true);
 		/*
 		 * Extra XML CSontent to be sent in XACML Request (ContentTest element)
 		 */
 		jaxbProvider.setExtraClass(new Class[] { ContentTest.class });
-		final DomainsResource domainsResourceProxy = JAXRSClientFactory.create(serviceBaseURL, DomainsResource.class, Collections.singletonList(jaxbProvider));
-
-		/*
-		 * Request/response logging (for debugging).
-		 */
-		final ClientConfiguration clientConf = WebClient.getConfig(domainsResourceProxy);
-		clientConf.getInInterceptors().add(new LoggingInInterceptor());
-		clientConf.getOutInterceptors().add(new LoggingOutInterceptor());
+		// Use LoggingFeature for debugging
+		final DomainsResource domainsResourceProxy = JAXRSClientFactory.create(serviceBaseURL, DomainsResource.class, Collections.singletonList(jaxbProvider), Collections.singletonList(new LoggingFeature()), null);
 
 		// Get your domain's resource
 		final DomainResource myDomain = domainsResourceProxy.getDomainResource(domainId);
