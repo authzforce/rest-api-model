@@ -6,7 +6,7 @@
 		<version>9.1.0</version>
 	</parent>
 	<artifactId>authzforce-ce-rest-api-model</artifactId>
-	<version>7.0.0-SNAPSHOT</version>
+	<version>7.0.1-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>AuthzForce CE - Generic REST API model for Authorization PDPs</description>
 	<url>https://github.com/authzforce/rest-api-model</url>
