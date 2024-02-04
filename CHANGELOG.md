@@ -1,6 +1,20 @@
 # Change log
 All notable changes to this project are documented in this file following the [Keep a CHANGELOG](http://keepachangelog.com) conventions. This project adheres to [FIWARE Versioning](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/Releases_and_Sprints_numbering).
 
+## 7.0.0
+### Changed
+- Parent project `authzforce-ce-parent` version: 9.1.0:
+  - **Migrated to Java 17** (as the minimum required JRE version from now on) and **JAXB 4.0** (javax.xml.bind packages replaced with jakarta.xml.bind.*)
+- Upgraded dependencies:
+  - authzforce-ce-atom-model: 9.1.0
+  - authzforce-ce-xacml-model: 9.1.0
+  - authzforce-ce-pdp-ext-model: 9.1.0
+  - **jakarta.ws.rs-api (Jakarta REST API): 3.0.0, replacing javax.ws.rs-api**
+  - org.json:json: 20231013
+
+### Added
+- Added support of GeoXACML media types to API (WADL)
+
 
 ## 6.0.0
 ### Changed
